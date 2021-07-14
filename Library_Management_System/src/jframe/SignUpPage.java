@@ -44,6 +44,10 @@ public class SignUpPage extends javax.swing.JFrame {
             int updatedRowCount = pst.executeUpdate();
             if(updatedRowCount >0 ){
                 JOptionPane.showMessageDialog(this, "SignUp Successfully");
+                LoginPage page = new LoginPage ();
+                page.setVisible(true);
+                dispose();
+                
             }else{
                 JOptionPane.showMessageDialog(this, "Record inserted Failure, SignUp Fail");
                 
