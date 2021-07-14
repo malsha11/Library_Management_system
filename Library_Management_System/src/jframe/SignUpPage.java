@@ -100,7 +100,7 @@ public class SignUpPage extends javax.swing.JFrame {
         
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms","root","");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms","root","");
             PreparedStatement pst = con.prepareStatement("select * from users where name = ? ");
             pst.setString(1, name);
             ResultSet rs = pst.executeQuery();

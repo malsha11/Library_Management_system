@@ -42,6 +42,37 @@ public class LoginPage extends javax.swing.JFrame {
         return true;
     }
     
+    // Varify cradit 
+    public void login(){
+        String name = txt_username.getText();
+        String pwd = txt_password.getText();
+        
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms","root","");
+            PreparedStatement pst = con.prepareStatement("select * from users where name = ? and password = ? ");
+            
+            pst.setString(1, name);
+            pst.setString(2, pwd);
+            
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()){
+                JOptionPane.showMessageDialog(this, "Login successful");
+                HomePage home = new HomePage();
+                home.setVisible(true);
+                this.dispose();
+                
+            }else{
+                JOptionPane.showMessageDialog(this, "incorrect username or password");
+                
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            
+        }
+    }
+    
+    
     
     
          
@@ -186,7 +217,9 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_usernameFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        validateLogin();
+        if (validateLogin()){
+            login();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
