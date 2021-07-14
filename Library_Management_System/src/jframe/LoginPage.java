@@ -25,7 +25,7 @@ public class LoginPage extends javax.swing.JFrame {
         initComponents(); 
     }
     
-    // Validaion
+    // Validaion login
     public boolean validateLogin(){
         String name = txt_username.getText();
         String pwd = txt_password.getText();
@@ -41,6 +41,7 @@ public class LoginPage extends javax.swing.JFrame {
         }
         return true;
     }
+    
     
     
          
@@ -177,11 +178,7 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_usernameActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (validateSignup() == true){
-              insertSignupDetails();
-            
-        }
-      
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txt_usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_usernameFocusLost
