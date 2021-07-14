@@ -9,6 +9,7 @@ import static java.lang.Class.forName;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -87,11 +88,40 @@ public class SignUpPage extends javax.swing.JFrame {
         }
         return true;
         
+        
     
         
         
     }
-    
+    // To check Duplicate usres
+    public boolean checkedDuplicateUsers(){
+        String name = txt_username.getText();
+        boolean isExits = false;
+        
+        try{
+            Connection con = DBConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement("select * from users where name = ? ");
+            pst.setString(1, name);
+            ResultSet rs = pst.executeQuery();
+            
+            if (rs.next()){
+                isExits = true;
+                
+            }else{
+                isExits = false;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+          
+        }
+        return isExits;
+    }
+            
+                
+            
+          
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
