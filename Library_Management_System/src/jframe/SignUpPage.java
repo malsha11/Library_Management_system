@@ -239,6 +239,11 @@ public class SignUpPage extends javax.swing.JFrame {
         txt_username.setBackground(new java.awt.Color(255, 204, 204));
         txt_username.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
         txt_username.setOpaque(false);
+        txt_username.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_usernameFocusLost(evt);
+            }
+        });
         txt_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_usernameActionPerformed(evt);
@@ -281,6 +286,10 @@ public class SignUpPage extends javax.swing.JFrame {
         }
       
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txt_usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_usernameFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_usernameFocusLost
 
     /**
      * @param args the command line arguments
