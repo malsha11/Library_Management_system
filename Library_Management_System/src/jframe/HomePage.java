@@ -133,6 +133,11 @@ public class HomePage extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/adicons8_Book_Shelf_50px.png"))); // NOI18N
         jLabel5.setText("  Manage Books");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -490,7 +495,7 @@ public class HomePage extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Student Id", "Name", "Course", "Branch"
+                "Book id", "Name", "Author", "Quentity"
             }
         ));
         jTable2.setAlignmentX(5.0F);
@@ -506,11 +511,15 @@ public class HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         ManageBooks books = new ManageBooks();
         books.setVisible(true);
         dispose();
         // Go to Mannage Books Page
-    }//GEN-LAST:event_jLabel9MouseClicked
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
