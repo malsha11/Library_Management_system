@@ -97,6 +97,40 @@ public class ManageBooks extends javax.swing.JFrame {
         return isAdded;
     }
     
+    // To Update Book details
+    public boolean updateBook () {
+        boolean isUpdated = false; // to check rowCount 
+        bookId = Integer.parseInt(txt_bookId.getText());
+        bookName = txt_bookName.getText();
+        author = txt_authorName.getText();
+        quentity = Integer.parseInt( txt_quentity.getText());
+        
+        try {
+            Connection con = DBConnection.getConnection();
+            String sql = "update book_details set book_name = ? ,author = ?, quentity = ? where book_id = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, bookName);
+            pst.setString(2, author);
+            pst.setInt(3, quentity);
+            pst.setInt(4, bookId);
+            
+            int rowCount = pst.executeUpdate(); 
+            if (rowCount >0 ){
+                isUpdated = true;
+                
+            }else{
+                isUpdated = false;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return isUpdated; /* i return this method beacuse I created this method using boolean vale my retun type is boolean  
+        (It means recorded is updated successfully ,return true : record updated failer this method return false)*/
+        
+    }
+    
     // Clear table method
     public void clearTable(){
         DefaultTableModel model = (DefaultTableModel)tbl_bookDetails.getModel();
@@ -272,6 +306,11 @@ public class ManageBooks extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton3.setText("UPDATE");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 710, 110, 60));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 830));
@@ -468,6 +507,17 @@ public class ManageBooks extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Book Added Failed");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if ( updateBook() == true){ // call updateBook method
+            JOptionPane.showMessageDialog(this, "Book updated Successfully");
+            clearTable(); // call clearTable method ( for after adding book clear the table data)
+            setBookDetailsToTable(); // To display the information of the book added by admin in the table in GUI ( I create this method before "setBookDetailsToTable method" )
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Book updation Failed");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
