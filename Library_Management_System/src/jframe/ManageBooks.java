@@ -96,6 +96,13 @@ public class ManageBooks extends javax.swing.JFrame {
         
         return isAdded;
     }
+    
+    // Clear table method
+    public void clearTable(){
+        DefaultTableModel model = (DefaultTableModel)tbl_bookDetails.getModel();
+        model.setRowCount(0);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -454,6 +461,9 @@ public class ManageBooks extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if ( addBook() == true){ // call addBook method
             JOptionPane.showMessageDialog(this, "Book Added Successfully");
+            clearTable(); // call clearTable method ( for after adding book clear the table data)
+            setBookDetailsToTable(); // To display the information of the book added by admin in the table in GUI ( I create this method before "setBookDetailsToTable method" )
+            
         }else{
             JOptionPane.showMessageDialog(this, "Book Added Failed");
         }
