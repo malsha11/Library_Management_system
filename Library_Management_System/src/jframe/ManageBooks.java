@@ -7,8 +7,10 @@ package jframe;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -21,8 +23,8 @@ public class ManageBooks extends javax.swing.JFrame {
     /**
      * Creates new form ManageBooks
      */
-    String book_name,author;
-    int book_id,quentity;
+    String bookName,author;
+    int bookId,quentity;
     DefaultTableModel model;
     
     public ManageBooks() {
@@ -56,6 +58,43 @@ public class ManageBooks extends javax.swing.JFrame {
             
         }
         
+    }
+    // To add book to book_details table
+    public boolean addBook(){
+        
+        boolean isAdded = false; // to check rowCount 
+        bookId = Integer.parseInt(txt_bookId.getText());
+        bookName = txt_bookName.getText();
+        author = txt_authorName.getText();
+        quentity = Integer.parseInt( txt_quentity.getText());
+        
+        // Insert data into book_details table 
+        
+        try {
+            
+            Connection con = DBConnection.getConnection(); /** call DBConnection.java  file's DBConnection class  or You can use this two lines for DB connection Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms","root","");*/
+            
+            String sql = "insert into book_details values (? ,? ,? ,? )";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, bookId);
+            pst.setString(2, bookName);
+            pst.setString(3, author);
+            pst.setInt(4 , quentity);
+            
+            int rowCount = pst.executeUpdate();
+            if (rowCount >0 ){
+                isAdded = true;
+                
+            } else{
+                isAdded = false;
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return isAdded;
     }
 
     /**
@@ -216,6 +255,11 @@ public class ManageBooks extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setText("ADD");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 710, 110, 60));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
@@ -353,11 +397,13 @@ public class ManageBooks extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
-        // TODO add your handling code here:
+        HomePage home = new HomePage(); // go to home page
+        home.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        HomePage home = new HomePage();
+        HomePage home = new HomePage(); //go to home page
         home.setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
@@ -404,6 +450,14 @@ public class ManageBooks extends javax.swing.JFrame {
         txt_quentity.setText(model.getValueAt(rowNo, 3).toString());
         
     }//GEN-LAST:event_tbl_bookDetailsMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if ( addBook() == true){ // call addBook method
+            JOptionPane.showMessageDialog(this, "Book Added Successfully");
+        }else{
+            JOptionPane.showMessageDialog(this, "Book Added Failed");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

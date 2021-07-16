@@ -168,17 +168,17 @@ public class SignUpPage extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 30)); // NOI18N
         jLabel1.setText("LIBRARY   MANAGEMENT   SYSTEM");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(130, 40, 760, 110);
+        jLabel1.setBounds(180, 40, 760, 110);
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 102, 102));
         jLabel2.setText("Welcome  To");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(310, -10, 350, 110);
+        jLabel2.setBounds(360, -10, 350, 110);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/library-3.png.png"))); // NOI18N
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(-20, 0, 980, 830);
+        jLabel3.setBounds(0, 0, 980, 830);
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 830));
 
