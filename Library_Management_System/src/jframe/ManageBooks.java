@@ -131,6 +131,31 @@ public class ManageBooks extends javax.swing.JFrame {
         
     }
     
+    // To delete book details
+    public boolean deleteBook(){
+        boolean isDeleted = false;
+        bookId = Integer.parseInt(txt_bookId.getText());
+        
+        try {
+            Connection con = DBConnection.getConnection(); // connected to DB
+            String sql = "delete from book_details where book_id = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, bookId);
+            
+            int rowCount = pst.executeUpdate();
+            if(rowCount > 0){
+                isDeleted = true;
+                
+            }else{
+                isDeleted = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isDeleted;
+        
+    }
+    
     // Clear table method
     public void clearTable(){
         DefaultTableModel model = (DefaultTableModel)tbl_bookDetails.getModel();
@@ -291,6 +316,11 @@ public class ManageBooks extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton1.setText("DELETE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 710, 110, 60));
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
@@ -511,13 +541,24 @@ public class ManageBooks extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if ( updateBook() == true){ // call updateBook method
             JOptionPane.showMessageDialog(this, "Book updated Successfully");
-            clearTable(); // call clearTable method ( for after adding book clear the table data)
-            setBookDetailsToTable(); // To display the information of the book added by admin in the table in GUI ( I create this method before "setBookDetailsToTable method" )
+            clearTable(); // call clearTable method ( for after updated book ,clear the table data)
+            setBookDetailsToTable(); // To display the information of the book updated by admin in the table in GUI ( I create this method before "setBookDetailsToTable method" )
             
         }else{
             JOptionPane.showMessageDialog(this, "Book updation Failed");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if ( deleteBook() == true){ // call updateBook method
+            JOptionPane.showMessageDialog(this, "Book deleted Successfully");
+            clearTable(); // call clearTable method ( for after deleted book, clear the table data)
+            setBookDetailsToTable(); // To display the information of the book in the table in GUI ( I create this method before "setBookDetailsToTable method" )
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Book delete Failed");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
