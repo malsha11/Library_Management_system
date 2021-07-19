@@ -143,7 +143,7 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel11.setText("Username");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 230, 30));
 
-        txt_password.setBackground(new java.awt.Color(78, 175, 175));
+        txt_password.setBackground(new java.awt.Color(87, 169, 169));
         txt_password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
         txt_password.setOpaque(false);
         jPanel2.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 300, 40));
@@ -156,7 +156,7 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_Secure_50px.png"))); // NOI18N
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 50, 50));
 
-        txt_username.setBackground(new java.awt.Color(96, 179, 179));
+        txt_username.setBackground(new java.awt.Color(87, 169, 169));
         txt_username.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
         txt_username.setOpaque(false);
         txt_username.addFocusListener(new java.awt.event.FocusAdapter() {
