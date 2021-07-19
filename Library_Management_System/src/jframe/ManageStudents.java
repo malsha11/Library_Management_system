@@ -18,7 +18,7 @@ import javax.swing.table.TableModel;
  *
  * @author ACER
  */
-public class ManageBooks extends javax.swing.JFrame {
+public class ManageStudents extends javax.swing.JFrame {
 
     /**
      * Creates new form ManageBooks
@@ -27,7 +27,7 @@ public class ManageBooks extends javax.swing.JFrame {
     int bookId,quentity;
     DefaultTableModel model;
     
-    public ManageBooks() {
+    public ManageStudents() {
         initComponents();
         setBookDetailsToTable(); // call the bookDeatilsToTable Method
     }
@@ -47,7 +47,7 @@ public class ManageBooks extends javax.swing.JFrame {
                 int quentity =rs.getInt("quentity");
                 
                 Object[] obj = {bookId,bookName,author,quentity};
-                model = (DefaultTableModel) tbl_bookDetails.getModel();
+                model = (DefaultTableModel) tbl_studentDetails.getModel();
                 
                 model.addRow(obj);
                 
@@ -63,8 +63,8 @@ public class ManageBooks extends javax.swing.JFrame {
     public boolean addBook(){
         
         boolean isAdded = false; // to check rowCount 
-        bookId = Integer.parseInt(txt_bookId.getText());
-        bookName = txt_bookName.getText();
+        bookId = Integer.parseInt(txt_studentId.getText());
+        bookName = txt_studentName.getText();
         author = txt_authorName.getText();
         quentity = Integer.parseInt( txt_quentity.getText());
         
@@ -100,8 +100,8 @@ public class ManageBooks extends javax.swing.JFrame {
     // To Update Book details
     public boolean updateBook () {
         boolean isUpdated = false; // to check rowCount 
-        bookId = Integer.parseInt(txt_bookId.getText());
-        bookName = txt_bookName.getText();
+        bookId = Integer.parseInt(txt_studentId.getText());
+        bookName = txt_studentName.getText();
         author = txt_authorName.getText();
         quentity = Integer.parseInt( txt_quentity.getText());
         
@@ -134,7 +134,7 @@ public class ManageBooks extends javax.swing.JFrame {
     // To delete book details
     public boolean deleteBook(){
         boolean isDeleted = false;
-        bookId = Integer.parseInt(txt_bookId.getText());
+        bookId = Integer.parseInt(txt_studentId.getText());
         
         try {
             Connection con = DBConnection.getConnection(); // connected to DB
@@ -158,7 +158,7 @@ public class ManageBooks extends javax.swing.JFrame {
     
     // Clear table method
     public void clearTable(){
-        DefaultTableModel model = (DefaultTableModel)tbl_bookDetails.getModel();
+        DefaultTableModel model = (DefaultTableModel)tbl_studentDetails.getModel();
         model.setRowCount(0);
     }
     
@@ -176,19 +176,19 @@ public class ManageBooks extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txt_bookId = new javax.swing.JTextField();
+        txt_studentId = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        txt_bookName = new javax.swing.JTextField();
-        txt_authorName = new javax.swing.JTextField();
+        txt_studentName = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        txt_quentity = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        combo_branch = new javax.swing.JComboBox<>();
+        combo_CourseName = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_bookDetails = new javax.swing.JTable();
+        tbl_studentDetails = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -238,80 +238,50 @@ public class ManageBooks extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 50));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
-        jLabel11.setText("Enter Book Id");
+        jLabel11.setText("Enter Student Id");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 230, 30));
 
-        txt_bookId.setBackground(new java.awt.Color(153, 153, 255));
-        txt_bookId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
-        txt_bookId.setOpaque(false);
-        txt_bookId.addFocusListener(new java.awt.event.FocusAdapter() {
+        txt_studentId.setBackground(new java.awt.Color(153, 153, 255));
+        txt_studentId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
+        txt_studentId.setOpaque(false);
+        txt_studentId.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_bookIdFocusLost(evt);
+                txt_studentIdFocusLost(evt);
             }
         });
-        txt_bookId.addActionListener(new java.awt.event.ActionListener() {
+        txt_studentId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_bookIdActionPerformed(evt);
+                txt_studentIdActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_bookId, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 300, 40));
+        jPanel1.add(txt_studentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 300, 40));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
-        jLabel12.setText("Enter Book Name");
+        jLabel12.setText("Enter Student Name");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 230, 50));
 
-        txt_bookName.setBackground(new java.awt.Color(153, 153, 255));
-        txt_bookName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
-        txt_bookName.setOpaque(false);
-        txt_bookName.addFocusListener(new java.awt.event.FocusAdapter() {
+        txt_studentName.setBackground(new java.awt.Color(153, 153, 255));
+        txt_studentName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
+        txt_studentName.setOpaque(false);
+        txt_studentName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_bookNameFocusLost(evt);
+                txt_studentNameFocusLost(evt);
             }
         });
-        txt_bookName.addActionListener(new java.awt.event.ActionListener() {
+        txt_studentName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_bookNameActionPerformed(evt);
+                txt_studentNameActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_bookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 300, 60));
-
-        txt_authorName.setBackground(new java.awt.Color(153, 153, 255));
-        txt_authorName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
-        txt_authorName.setOpaque(false);
-        txt_authorName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_authorNameFocusLost(evt);
-            }
-        });
-        txt_authorName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_authorNameActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txt_authorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, 300, 60));
+        jPanel1.add(txt_studentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 300, 60));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
-        jLabel14.setText("Author Name");
+        jLabel14.setText("Select Course");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, 230, 50));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
-        jLabel16.setText("Quentity");
+        jLabel16.setText("Select Branch");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 530, 230, 50));
-
-        txt_quentity.setBackground(new java.awt.Color(153, 153, 255));
-        txt_quentity.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
-        txt_quentity.setOpaque(false);
-        txt_quentity.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_quentityFocusLost(evt);
-            }
-        });
-        txt_quentity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_quentityActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txt_quentity, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 560, 300, 60));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -343,36 +313,44 @@ public class ManageBooks extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 710, 110, 60));
 
+        combo_branch.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
+        combo_branch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IT", "CS", "PLAIN", "ELECTRONICS" }));
+        jPanel1.add(combo_branch, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 600, 330, -1));
+
+        combo_CourseName.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
+        combo_CourseName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BSC", "MSC", "PHD" }));
+        jPanel1.add(combo_CourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, 330, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 830));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        tbl_bookDetails.setBackground(new java.awt.Color(204, 204, 204));
-        tbl_bookDetails.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13), new java.awt.Color(0, 102, 153))); // NOI18N
-        tbl_bookDetails.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        tbl_bookDetails.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_studentDetails.setBackground(new java.awt.Color(204, 204, 204));
+        tbl_studentDetails.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13), new java.awt.Color(0, 102, 153))); // NOI18N
+        tbl_studentDetails.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        tbl_studentDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Book id", "Name", "Author", "Quentity"
+                "Student id", "Name", "Course", "Branch"
             }
         ));
-        tbl_bookDetails.setAlignmentX(5.0F);
-        tbl_bookDetails.setAlignmentY(5.0F);
-        tbl_bookDetails.setRowHeight(40);
-        tbl_bookDetails.setRowMargin(10);
-        tbl_bookDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_studentDetails.setAlignmentX(5.0F);
+        tbl_studentDetails.setAlignmentY(5.0F);
+        tbl_studentDetails.setRowHeight(40);
+        tbl_studentDetails.setRowMargin(10);
+        tbl_studentDetails.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_bookDetailsMouseClicked(evt);
+                tbl_studentDetailsMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tbl_bookDetails);
+        jScrollPane2.setViewportView(tbl_studentDetails);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/adicons8_Book_Shelf_50px.png"))); // NOI18N
-        jLabel2.setText("   Manage Books");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_People_50px.png"))); // NOI18N
+        jLabel2.setText("  Manage Students");
 
         jPanel4.setBackground(new java.awt.Color(204, 0, 0));
 
@@ -445,8 +423,8 @@ public class ManageBooks extends javax.swing.JFrame {
                         .addGap(1023, 1023, 1023)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(406, 406, 406)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(394, 394, 394)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -458,19 +436,79 @@ public class ManageBooks extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(128, 128, 128)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(311, Short.MAX_VALUE))
+                .addContainerGap(310, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 1140, 820));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tbl_studentDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_studentDetailsMouseClicked
+        
+        int rowNo = tbl_studentDetails.getSelectedRow();
+        TableModel model = tbl_studentDetails.getModel();
+        txt_studentId.setText(model.getValueAt(rowNo, 0 ).toString());
+        txt_studentName.setText(model.getValueAt(rowNo, 1).toString());
+        txt_authorName.setText(model.getValueAt(rowNo, 2).toString());
+        txt_quentity.setText(model.getValueAt(rowNo, 3).toString());
+        
+    }//GEN-LAST:event_tbl_studentDetailsMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if ( updateBook() == true){ // call updateBook method
+            JOptionPane.showMessageDialog(this, "Book updated Successfully");
+            clearTable(); // call clearTable method ( for after updated book ,clear the table data)
+            setBookDetailsToTable(); // To display the information of the book updated by admin in the table in GUI ( I create this method before "setBookDetailsToTable method" )
+
+        }else{
+            JOptionPane.showMessageDialog(this, "Book updation Failed");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if ( addBook() == true){ // call addBook method
+            JOptionPane.showMessageDialog(this, "Book Added Successfully");
+            clearTable(); // call clearTable method ( for after adding book clear the table data)
+            setBookDetailsToTable(); // To display the information of the book added by admin in the table in GUI ( I create this method before "setBookDetailsToTable method" )
+
+        }else{
+            JOptionPane.showMessageDialog(this, "Book Added Failed");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if ( deleteBook() == true){ // call updateBook method
+            JOptionPane.showMessageDialog(this, "Book deleted Successfully");
+            clearTable(); // call clearTable method ( for after deleted book, clear the table data)
+            setBookDetailsToTable(); // To display the information of the book in the table in GUI ( I create this method before "setBookDetailsToTable method" )
+
+        }else{
+            JOptionPane.showMessageDialog(this, "Book delete Failed");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_studentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_studentNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_studentNameActionPerformed
+
+    private void txt_studentNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_studentNameFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_studentNameFocusLost
+
+    private void txt_studentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_studentIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_studentIdActionPerformed
+
+    private void txt_studentIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_studentIdFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_studentIdFocusLost
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         HomePage home = new HomePage(); // go to home page
@@ -483,82 +521,6 @@ public class ManageBooks extends javax.swing.JFrame {
         home.setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
-
-    private void txt_bookIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookIdFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_bookIdFocusLost
-
-    private void txt_bookIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_bookIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_bookIdActionPerformed
-
-    private void txt_bookNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookNameFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_bookNameFocusLost
-
-    private void txt_bookNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_bookNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_bookNameActionPerformed
-
-    private void txt_authorNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_authorNameFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_authorNameFocusLost
-
-    private void txt_authorNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_authorNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_authorNameActionPerformed
-
-    private void txt_quentityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_quentityFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_quentityFocusLost
-
-    private void txt_quentityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_quentityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_quentityActionPerformed
-
-    private void tbl_bookDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bookDetailsMouseClicked
-        
-        int rowNo = tbl_bookDetails.getSelectedRow();
-        TableModel model = tbl_bookDetails.getModel();
-        txt_bookId.setText(model.getValueAt(rowNo, 0 ).toString());
-        txt_bookName.setText(model.getValueAt(rowNo, 1).toString());
-        txt_authorName.setText(model.getValueAt(rowNo, 2).toString());
-        txt_quentity.setText(model.getValueAt(rowNo, 3).toString());
-        
-    }//GEN-LAST:event_tbl_bookDetailsMouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if ( addBook() == true){ // call addBook method
-            JOptionPane.showMessageDialog(this, "Book Added Successfully");
-            clearTable(); // call clearTable method ( for after adding book clear the table data)
-            setBookDetailsToTable(); // To display the information of the book added by admin in the table in GUI ( I create this method before "setBookDetailsToTable method" )
-            
-        }else{
-            JOptionPane.showMessageDialog(this, "Book Added Failed");
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if ( updateBook() == true){ // call updateBook method
-            JOptionPane.showMessageDialog(this, "Book updated Successfully");
-            clearTable(); // call clearTable method ( for after updated book ,clear the table data)
-            setBookDetailsToTable(); // To display the information of the book updated by admin in the table in GUI ( I create this method before "setBookDetailsToTable method" )
-            
-        }else{
-            JOptionPane.showMessageDialog(this, "Book updation Failed");
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if ( deleteBook() == true){ // call updateBook method
-            JOptionPane.showMessageDialog(this, "Book deleted Successfully");
-            clearTable(); // call clearTable method ( for after deleted book, clear the table data)
-            setBookDetailsToTable(); // To display the information of the book in the table in GUI ( I create this method before "setBookDetailsToTable method" )
-            
-        }else{
-            JOptionPane.showMessageDialog(this, "Book delete Failed");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -577,25 +539,28 @@ public class ManageBooks extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManageBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManageBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManageBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManageBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManageBooks().setVisible(true);
+                new ManageStudents().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> combo_CourseName;
+    private javax.swing.JComboBox<String> combo_branch;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -613,10 +578,8 @@ public class ManageBooks extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tbl_bookDetails;
-    private javax.swing.JTextField txt_authorName;
-    private javax.swing.JTextField txt_bookId;
-    private javax.swing.JTextField txt_bookName;
-    private javax.swing.JTextField txt_quentity;
+    private javax.swing.JTable tbl_studentDetails;
+    private javax.swing.JTextField txt_studentId;
+    private javax.swing.JTextField txt_studentName;
     // End of variables declaration//GEN-END:variables
 }
