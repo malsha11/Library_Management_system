@@ -46,7 +46,7 @@ public class ManageStudents extends javax.swing.JFrame {
                 String course = rs.getString("course");
                 String branch =rs.getString("branch");
                 
-                Object[] obj = {studentId,studentName,author,quentity};
+                Object[] obj = {studentId,studentName,course,branch};
                 model = (DefaultTableModel) tbl_studentDetails.getModel();
                 
                 model.addRow(obj);
@@ -96,22 +96,22 @@ public class ManageStudents extends javax.swing.JFrame {
         return isAdded;
     }
     
-    // To Update Book details
-    public boolean updateBook () {
+    // To Update student details
+    public boolean updateStudent () {
         boolean isUpdated = false; // to check rowCount 
-        bookId = Integer.parseInt(txt_studentId.getText());
-        bookName = txt_studentName.getText();
-        author = txt_authorName.getText();
-        quentity = Integer.parseInt( txt_quentity.getText());
+        studentId = Integer.parseInt(txt_studentId.getText());
+        studentName = txt_studentName.getText();
+        course = combo_CourseName.getSelectedItem().toString();
+        branch = combo_branch.getSelectedItem().toString();
         
         try {
             Connection con = DBConnection.getConnection();
-            String sql = "update book_details set book_name = ? ,author = ?, quentity = ? where book_id = ?";
+            String sql = "update student_details set name = ? ,course = ?, branch = ? where student_id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, bookName);
-            pst.setString(2, author);
-            pst.setInt(3, quentity);
-            pst.setInt(4, bookId);
+            pst.setString(1, studentName);
+            pst.setString(2, course);
+            pst.setString(3, branch);
+            pst.setInt(4, studentId);
             
             int rowCount = pst.executeUpdate(); 
             if (rowCount >0 ){
