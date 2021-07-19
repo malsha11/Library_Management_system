@@ -476,7 +476,7 @@ public class ManageStudents extends javax.swing.JFrame {
             clearTable(); // call clearTable method ( for after adding book clear the table data)
             setStudentDetailsToTable(); // To display the information of the student updated by admin in the table in GUI ( I create this method before "setstudentDetailsToTable method" )
         }else{
-            JOptionPane.showMessageDialog(this, "student Added Failed");
+            JOptionPane.showMessageDialog(this, "student Addition Failed");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
