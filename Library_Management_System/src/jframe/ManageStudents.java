@@ -460,13 +460,13 @@ public class ManageStudents extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_studentDetailsMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if ( updateBook() == true){ // call updateBook method
-            JOptionPane.showMessageDialog(this, "Book updated Successfully");
+        if ( updateStudent()== true){ // call update student method
+            JOptionPane.showMessageDialog(this, "The Student details updated Successfully");
             clearTable(); // call clearTable method ( for after updated book ,clear the table data)
             setStudentDetailsToTable(); // To display the information of the student updated by admin in the table in GUI ( I create this method before "setstudentDetailsToTable method" )
 
         }else{
-            JOptionPane.showMessageDialog(this, "Book updation Failed");
+            JOptionPane.showMessageDialog(this, "The Student details  updation Failed");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
