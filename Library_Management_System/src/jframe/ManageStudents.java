@@ -455,6 +455,9 @@ public class ManageStudents extends javax.swing.JFrame {
         TableModel model = tbl_studentDetails.getModel();
         txt_studentId.setText(model.getValueAt(rowNo, 0 ).toString());
         txt_studentName.setText(model.getValueAt(rowNo, 1).toString());
+        
+        combo_CourseName.setSelectedItem(model.getValueAt(rowNo, 2).toString()); // to select data in combo_CourseName
+        combo_branch.setSelectedItem(model.getValueAt(rowNo, 3));// to select data in combo_branch
        
         
     }//GEN-LAST:event_tbl_studentDetailsMouseClicked
