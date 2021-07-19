@@ -38,15 +38,15 @@ public class ManageStudents extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms","root",""); //DB connection
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(" select * from book_details"); // select all the data from students_details table
+            ResultSet rs = st.executeQuery(" select * from student_details"); // select all the data from students_details table
             
             while (rs.next()){ // continue studentDetails table addtions
-                String bookId = rs.getString("book_id");
-                String bookName = rs.getString("book_name");
-                String author = rs.getString("author");
-                int quentity =rs.getInt("quentity");
+                String studentId = rs.getString("student_id");
+                String studentName = rs.getString("student_name");
+                String course = rs.getString("course");
+                String branch =rs.getString("branch");
                 
-                Object[] obj = {bookId,bookName,author,quentity};
+                Object[] obj = {studentId,studentName,author,quentity};
                 model = (DefaultTableModel) tbl_studentDetails.getModel();
                 
                 model.addRow(obj);
