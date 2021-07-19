@@ -74,12 +74,12 @@ public class ManageStudents extends javax.swing.JFrame {
             Connection con = DBConnection.getConnection(); /** call DBConnection.java  file's DBConnection class  or You can use this two lines for DB connection Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms","root","");*/
             
-            String sql = "insert into book_details values (? ,? ,? ,? )";
+            String sql = "insert into student_details values (? ,? ,? ,? )";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, bookId);
-            pst.setString(2, bookName);
-            pst.setString(3, author);
-            pst.setInt(4 , quentity);
+            pst.setInt(1, studentId);
+            pst.setString(2, studentName);
+            pst.setString(3, course);
+            pst.setString(4 , branch);
             
             int rowCount = pst.executeUpdate();
             if (rowCount >0 ){
