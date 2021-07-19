@@ -130,16 +130,16 @@ public class ManageStudents extends javax.swing.JFrame {
         
     }
     
-    // To delete book details
-    public boolean deleteBook(){
+    // To delete student details
+    public boolean deleteStudent(){
         boolean isDeleted = false;
-        bookId = Integer.parseInt(txt_studentId.getText());
+        studentId = Integer.parseInt(txt_studentId.getText());
         
         try {
             Connection con = DBConnection.getConnection(); // connected to DB
-            String sql = "delete from book_details where book_id = ?";
+            String sql = "delete from student_details where student_id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, bookId);
+            pst.setInt(1, studentId);
             
             int rowCount = pst.executeUpdate();
             if(rowCount > 0){
@@ -473,21 +473,21 @@ public class ManageStudents extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if ( addStudent() == true){ // call addStudent method
             JOptionPane.showMessageDialog(this, "student Added Successfully");
-            clearTable(); // call clearTable method ( for after adding book clear the table data)
-            setStudentDetailsToTable(); // To display the information of the student updated by admin in the table in GUI ( I create this method before "setstudentDetailsToTable method" )
+            clearTable(); // call clearTable method ( for after adding student clear the table data)
+            setStudentDetailsToTable(); // To display the student information  in the table in GUI ( I create this method before "setstudentDetailsToTable method" )
         }else{
             JOptionPane.showMessageDialog(this, "student Addition Failed");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if ( deleteBook() == true){ // call updateBook method
-            JOptionPane.showMessageDialog(this, "Book deleted Successfully");
-            clearTable(); // call clearTable method ( for after deleted book, clear the table data)
-            setStudentDetailsToTable(); // To display the information of the student updated by admin in the table in GUI ( I create this method before "setstudentDetailsToTable method" )
+        if ( deleteStudent() == true){ // call deleteStudent method
+            JOptionPane.showMessageDialog(this, "Student deleted Successfully");
+            clearTable(); // call clearTable method ( for after deleted student, clear the table data)
+            setStudentDetailsToTable(); // To display the  student information in the table in GUI ( I create this method before "setstudentDetailsToTable method" )
 
         }else{
-            JOptionPane.showMessageDialog(this, "Book delete Failed");
+            JOptionPane.showMessageDialog(this, "Student delete Failed");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
