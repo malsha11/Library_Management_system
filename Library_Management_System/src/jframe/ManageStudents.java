@@ -23,24 +23,24 @@ public class ManageStudents extends javax.swing.JFrame {
     /**
      * Creates new form ManageBooks
      */
-    String bookName,author;
-    int bookId,quentity;
+    String studentName,course,branch;
+    int studentId;
     DefaultTableModel model;
     
     public ManageStudents() {
         initComponents();
-        setBookDetailsToTable(); // call the bookDeatilsToTable Method
+        setStudentDetailsToTable(); // call the bookDeatilsToTable Method
     }
     
-    // To set the book details in to the table 
-    public void setBookDetailsToTable(){
+    // To set the Students details in to the table 
+    public void setStudentDetailsToTable(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms","root",""); //DB connection
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(" select * from book_details"); // select all the data from book_details table
+            ResultSet rs = st.executeQuery(" select * from book_details"); // select all the data from students_details table
             
-            while (rs.next()){ // continue bookDetails table addtions
+            while (rs.next()){ // continue studentDetails table addtions
                 String bookId = rs.getString("book_id");
                 String bookName = rs.getString("book_name");
                 String author = rs.getString("author");
@@ -59,16 +59,15 @@ public class ManageStudents extends javax.swing.JFrame {
         }
         
     }
-    // To add book to book_details table
-    public boolean addBook(){
+    // To add student to student_details table
+    public boolean addStudent(){
         
         boolean isAdded = false; // to check rowCount 
-        bookId = Integer.parseInt(txt_studentId.getText());
-        bookName = txt_studentName.getText();
-        author = txt_authorName.getText();
-        quentity = Integer.parseInt( txt_quentity.getText());
-        
-        // Insert data into book_details table 
+        studentId = Integer.parseInt(txt_studentId.getText());
+        studentName = txt_studentName.getText();
+        course = combo_CourseName.getSelectedItem().toString();
+        branch = combo_branch.getSelectedItem().toString();
+        // Insert data into student_details table 
         
         try {
             
@@ -456,8 +455,7 @@ public class ManageStudents extends javax.swing.JFrame {
         TableModel model = tbl_studentDetails.getModel();
         txt_studentId.setText(model.getValueAt(rowNo, 0 ).toString());
         txt_studentName.setText(model.getValueAt(rowNo, 1).toString());
-        txt_authorName.setText(model.getValueAt(rowNo, 2).toString());
-        txt_quentity.setText(model.getValueAt(rowNo, 3).toString());
+       
         
     }//GEN-LAST:event_tbl_studentDetailsMouseClicked
 
@@ -465,7 +463,7 @@ public class ManageStudents extends javax.swing.JFrame {
         if ( updateBook() == true){ // call updateBook method
             JOptionPane.showMessageDialog(this, "Book updated Successfully");
             clearTable(); // call clearTable method ( for after updated book ,clear the table data)
-            setBookDetailsToTable(); // To display the information of the book updated by admin in the table in GUI ( I create this method before "setBookDetailsToTable method" )
+            setStudentDetailsToTable(); // To display the information of the student updated by admin in the table in GUI ( I create this method before "setstudentDetailsToTable method" )
 
         }else{
             JOptionPane.showMessageDialog(this, "Book updation Failed");
@@ -473,13 +471,12 @@ public class ManageStudents extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if ( addBook() == true){ // call addBook method
-            JOptionPane.showMessageDialog(this, "Book Added Successfully");
+        if ( addStudent() == true){ // call addStudent method
+            JOptionPane.showMessageDialog(this, "student Added Successfully");
             clearTable(); // call clearTable method ( for after adding book clear the table data)
-            setBookDetailsToTable(); // To display the information of the book added by admin in the table in GUI ( I create this method before "setBookDetailsToTable method" )
-
+            setStudentDetailsToTable(); // To display the information of the student updated by admin in the table in GUI ( I create this method before "setstudentDetailsToTable method" )
         }else{
-            JOptionPane.showMessageDialog(this, "Book Added Failed");
+            JOptionPane.showMessageDialog(this, "student Added Failed");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -487,7 +484,7 @@ public class ManageStudents extends javax.swing.JFrame {
         if ( deleteBook() == true){ // call updateBook method
             JOptionPane.showMessageDialog(this, "Book deleted Successfully");
             clearTable(); // call clearTable method ( for after deleted book, clear the table data)
-            setBookDetailsToTable(); // To display the information of the book in the table in GUI ( I create this method before "setBookDetailsToTable method" )
+            setStudentDetailsToTable(); // To display the information of the student updated by admin in the table in GUI ( I create this method before "setstudentDetailsToTable method" )
 
         }else{
             JOptionPane.showMessageDialog(this, "Book delete Failed");
