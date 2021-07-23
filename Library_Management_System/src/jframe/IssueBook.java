@@ -165,9 +165,9 @@ public class IssueBook extends javax.swing.JFrame {
             pst.setInt(2, studentId);
             pst.setString(3, "pending");
             
-            int rowCount = pst.executeUpdate();
+            ResultSet rs  = pst.executeQuery();
             
-            if ( rowCount > 0 ){
+            if ( rs.next()){
                 isAlreadyIssued = true;
             }else{
                 isAlreadyIssued = false;
@@ -547,12 +547,21 @@ public class IssueBook extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_studentIdActionPerformed
 
     private void btn_issuedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issuedBookActionPerformed
-        if (issueBook() == true){
+        if (isAlreadyIssued() == false){
+            
+            if (issueBook() == true){
+                
             JOptionPane.showMessageDialog(this, " Book Issued Successfully ");
             updateBookCount(); // call the updateBookCount method
-        }else{
+            
+            }else{
             JOptionPane.showMessageDialog(this, " Can't Issued the book ");
         }
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "This student Already has this book ");
+        }
+        
     }//GEN-LAST:event_btn_issuedBookActionPerformed
 
     /**
