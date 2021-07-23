@@ -31,12 +31,14 @@ public class IssueBook extends javax.swing.JFrame {
             pst.setInt(1, bookId);
             ResultSet rs = pst.executeQuery();
             
-            while (rs.next()){
+            if (rs.next()){
                 lbl_bookId.setText(rs.getString("book_id"));
                 lbl_bookName.setText(rs.getString("book_name"));
                 lbl_author.setText(rs.getString("author"));
                 lbl_quentity.setText(rs.getString("quentity"));
                 
+            }else{
+                lbl_bookError.setText("Inviled BookId ");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,13 +56,16 @@ public class IssueBook extends javax.swing.JFrame {
             pst.setInt(1, studentId);
             ResultSet rs = pst.executeQuery();
             
-            while (rs.next()){
+            if (rs.next()){
                 lbl_studentId.setText(rs.getString("student_id"));
                 lbl_studentName.setText(rs.getString("name"));
                 lbl_course.setText(rs.getString("course"));
                 lbl_branch.setText(rs.getString("branch"));
                 
-            }
+            }else{
+                lbl_studentError.setText("Invalid Student Id");
+                  
+                    }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,12 +94,12 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_studentId = new javax.swing.JLabel();
         lbl_studentName = new javax.swing.JLabel();
         lbl_course = new javax.swing.JLabel();
+        lbl_studentError = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
         lbl_quentity = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -102,6 +107,8 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_bookId = new javax.swing.JLabel();
         lbl_bookName = new javax.swing.JLabel();
         lbl_author = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        lbl_bookError = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -190,6 +197,11 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_course.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(lbl_course, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 220, 30));
 
+        lbl_studentError.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_studentError.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lbl_studentError.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(lbl_studentError, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 660, 340, -1));
+
         panal_main.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 460, 800));
 
         jPanel4.setBackground(new java.awt.Color(153, 22, 116));
@@ -248,12 +260,6 @@ public class IssueBook extends javax.swing.JFrame {
 
         jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 115, 300, -1));
 
-        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Quentity :");
-        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 200, -1));
-
         lbl_quentity.setBackground(new java.awt.Color(255, 255, 255));
         lbl_quentity.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_quentity.setForeground(new java.awt.Color(255, 255, 255));
@@ -291,6 +297,17 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_author.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_author.setForeground(new java.awt.Color(255, 255, 255));
         jPanel4.add(lbl_author, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 220, 30));
+
+        jLabel20.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Quentity :");
+        jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 200, -1));
+
+        lbl_bookError.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_bookError.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lbl_bookError.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel4.add(lbl_bookError, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 670, 340, 30));
 
         panal_main.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 800));
 
@@ -424,7 +441,7 @@ public class IssueBook extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_bookIdActionPerformed
 
     private void txt_studentIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_studentIdFocusLost
-        // TODO add your handling code here:
+        getStudentDetails(); // call the getStudentDetails method
     }//GEN-LAST:event_txt_studentIdFocusLost
 
     private void txt_studentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_studentIdActionPerformed
@@ -487,7 +504,6 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -495,6 +511,7 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -507,11 +524,13 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lbl_author;
+    private javax.swing.JLabel lbl_bookError;
     private javax.swing.JLabel lbl_bookId;
     private javax.swing.JLabel lbl_bookName;
     private javax.swing.JLabel lbl_branch;
     private javax.swing.JLabel lbl_course;
     private javax.swing.JLabel lbl_quentity;
+    private javax.swing.JLabel lbl_studentError;
     private javax.swing.JLabel lbl_studentId;
     private javax.swing.JLabel lbl_studentName;
     private javax.swing.JPanel panal_main;
