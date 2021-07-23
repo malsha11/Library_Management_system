@@ -214,7 +214,7 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_studentError.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(lbl_studentError, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 660, 270, -1));
 
-        panal_main.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 460, 800));
+        panal_main.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 460, 800));
 
         jPanel4.setBackground(new java.awt.Color(153, 22, 116));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -298,17 +298,17 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_bookId.setBackground(new java.awt.Color(255, 255, 255));
         lbl_bookId.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_bookId.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(lbl_bookId, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 220, 30));
+        jPanel4.add(lbl_bookId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 220, 30));
 
         lbl_bookName.setBackground(new java.awt.Color(255, 255, 255));
         lbl_bookName.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_bookName.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(lbl_bookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 230, 30));
+        jPanel4.add(lbl_bookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 230, 30));
 
         lbl_author.setBackground(new java.awt.Color(255, 255, 255));
         lbl_author.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_author.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(lbl_author, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 220, 30));
+        jPanel4.add(lbl_author, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, 220, 30));
 
         jLabel20.setBackground(new java.awt.Color(255, 255, 255));
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -321,7 +321,7 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_bookError.setForeground(new java.awt.Color(255, 255, 255));
         jPanel4.add(lbl_bookError, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 670, 340, -1));
 
-        panal_main.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 800));
+        panal_main.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 810));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 25)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 22, 116));
