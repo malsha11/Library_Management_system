@@ -8,6 +8,7 @@ package jframe;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 
 /**
  *
@@ -38,7 +39,7 @@ public class IssueBook extends javax.swing.JFrame {
                 lbl_quentity.setText(rs.getString("quentity"));
                 
             }else{
-                lbl_bookError.setText("Inviled BookId ");
+                lbl_bookError.setText("Inviled BookId ");// if admin input invalid book id this messege will be show
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,7 +64,7 @@ public class IssueBook extends javax.swing.JFrame {
                 lbl_branch.setText(rs.getString("branch"));
                 
             }else{
-                lbl_studentError.setText("Invalid Student Id");
+                lbl_studentError.setText("Invalid Student Id"); // if admin input invalid student id this messege will be show
                   
                     }
         } catch (Exception e) {
@@ -71,6 +72,17 @@ public class IssueBook extends javax.swing.JFrame {
         }
         
     }
+    
+    // Insert issue book details to database
+    /*public boolean issueBook(){
+        
+        int bookId = Integer.parseInt(txt_bookId.getText());
+        int studentId = Integer.parseInt(txt_studentId.getText());
+        String bookName = lbl_bookName.getText();
+        String studentName = lbl_studentName.getText();
+        
+        Date uIssueDate = txt_issuedDate.getD
+    }*/
 
 
     /**
@@ -115,11 +127,11 @@ public class IssueBook extends javax.swing.JFrame {
         txt_bookId = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txt_studentId = new javax.swing.JTextField();
-        txt_issuedDate = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        txt_dueDate = new javax.swing.JTextField();
         btn_issuedBook = new javax.swing.JButton();
+        date_dueDate = new rojeru_san.componentes.RSDateChooser();
+        date_issueDate = new rojeru_san.componentes.RSDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -200,7 +212,7 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_studentError.setBackground(new java.awt.Color(255, 255, 255));
         lbl_studentError.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_studentError.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(lbl_studentError, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 660, 340, -1));
+        jPanel1.add(lbl_studentError, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 660, 270, -1));
 
         panal_main.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 460, 800));
 
@@ -307,7 +319,7 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_bookError.setBackground(new java.awt.Color(255, 255, 255));
         lbl_bookError.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_bookError.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(lbl_bookError, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 670, 340, 30));
+        jPanel4.add(lbl_bookError, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 670, 340, -1));
 
         panal_main.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 800));
 
@@ -372,20 +384,6 @@ public class IssueBook extends javax.swing.JFrame {
         });
         panal_main.add(txt_studentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 400, 290, 40));
 
-        txt_issuedDate.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 22, 116)));
-        txt_issuedDate.setOpaque(false);
-        txt_issuedDate.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_issuedDateFocusLost(evt);
-            }
-        });
-        txt_issuedDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_issuedDateActionPerformed(evt);
-            }
-        });
-        panal_main.add(txt_issuedDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 490, 290, 40));
-
         jLabel18.setBackground(new java.awt.Color(255, 255, 255));
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(153, 22, 116));
@@ -398,24 +396,22 @@ public class IssueBook extends javax.swing.JFrame {
         jLabel19.setText("Enter Due date  :");
         panal_main.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 580, 170, 30));
 
-        txt_dueDate.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 22, 116)));
-        txt_dueDate.setOpaque(false);
-        txt_dueDate.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_dueDateFocusLost(evt);
-            }
-        });
-        txt_dueDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_dueDateActionPerformed(evt);
-            }
-        });
-        panal_main.add(txt_dueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 570, 290, 40));
-
         btn_issuedBook.setBackground(new java.awt.Color(153, 22, 116));
         btn_issuedBook.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btn_issuedBook.setText("Issue Book");
         panal_main.add(btn_issuedBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 680, 150, 60));
+
+        date_dueDate.setBackground(new java.awt.Color(153, 22, 116));
+        date_dueDate.setForeground(new java.awt.Color(153, 22, 116));
+        date_dueDate.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
+        date_dueDate.setPlaceholder("Select Due Date");
+        panal_main.add(date_dueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 570, 280, -1));
+
+        date_issueDate.setBackground(new java.awt.Color(153, 22, 116));
+        date_issueDate.setForeground(new java.awt.Color(153, 22, 116));
+        date_issueDate.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
+        date_issueDate.setPlaceholder("Select Issued Date");
+        panal_main.add(date_issueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 500, 280, -1));
 
         getContentPane().add(panal_main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1410, 800));
 
@@ -447,22 +443,6 @@ public class IssueBook extends javax.swing.JFrame {
     private void txt_studentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_studentIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_studentIdActionPerformed
-
-    private void txt_issuedDateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_issuedDateFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_issuedDateFocusLost
-
-    private void txt_issuedDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_issuedDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_issuedDateActionPerformed
-
-    private void txt_dueDateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_dueDateFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_dueDateFocusLost
-
-    private void txt_dueDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dueDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_dueDateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -501,6 +481,8 @@ public class IssueBook extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_issuedBook;
+    private rojeru_san.componentes.RSDateChooser date_dueDate;
+    private rojeru_san.componentes.RSDateChooser date_issueDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -535,8 +517,6 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_studentName;
     private javax.swing.JPanel panal_main;
     private javax.swing.JTextField txt_bookId;
-    private javax.swing.JTextField txt_dueDate;
-    private javax.swing.JTextField txt_issuedDate;
     private javax.swing.JTextField txt_studentId;
     // End of variables declaration//GEN-END:variables
 }
