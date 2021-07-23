@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -74,15 +76,52 @@ public class IssueBook extends javax.swing.JFrame {
     }
     
     // Insert issue book details to database
-    /*public boolean issueBook(){
-        
+    public boolean issueBook(){
+        boolean isIssued = false;
         int bookId = Integer.parseInt(txt_bookId.getText());
         int studentId = Integer.parseInt(txt_studentId.getText());
         String bookName = lbl_bookName.getText();
         String studentName = lbl_studentName.getText();
         
-        Date uIssueDate = txt_issuedDate.getD
-    }*/
+        Date uIssueDate = date_issueDate.getDatoFecha();// util data we can't get this in to SQL package due to we must convet this to SQL data
+        Date uDueDate = date_dueDate.getDatoFecha(); //util data
+        
+        
+        // convert util data to SQl data
+        Long l1 = uIssueDate.getTime();
+        Long l2 = uDueDate.getTime();
+        java.sql.Date sIssueDate = new java.sql.Date(l1);
+        java.sql.Date sDueDate = new java.sql.Date(l2);
+        
+        try {
+            
+            Connection con = DBConnection.getConnection(); // connect to Data base
+            String sql = "insert into issue_book_details (book_id,book_name,student_id,Student_name,"
+                    + "issue_date,due_date,status) values ( ?, ?, ?, ?, ?, ?, ? )";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, bookId);
+            pst.setString(2,bookName);
+            pst.setInt(3,studentId);
+            pst.setString(4, studentName);
+            pst.setDate(5, sIssueDate);
+            pst.setDate(6, sDueDate);
+            pst.setString(7, "pending");
+            
+            int rowCount = pst.executeUpdate();
+            if ( rowCount > 0){
+                isIssued = true;
+            }else {
+                isIssued = false;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return isIssued;
+        
+       
+    }
 
 
     /**
@@ -399,6 +438,11 @@ public class IssueBook extends javax.swing.JFrame {
         btn_issuedBook.setBackground(new java.awt.Color(153, 22, 116));
         btn_issuedBook.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btn_issuedBook.setText("Issue Book");
+        btn_issuedBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_issuedBookActionPerformed(evt);
+            }
+        });
         panal_main.add(btn_issuedBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 680, 150, 60));
 
         date_dueDate.setBackground(new java.awt.Color(153, 22, 116));
@@ -443,6 +487,14 @@ public class IssueBook extends javax.swing.JFrame {
     private void txt_studentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_studentIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_studentIdActionPerformed
+
+    private void btn_issuedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issuedBookActionPerformed
+        if (issueBook() == true){
+            JOptionPane.showMessageDialog(this, " Book Issued Successfully ");
+        }else{
+            JOptionPane.showMessageDialog(this, " Can't Issued the book ");
+        }
+    }//GEN-LAST:event_btn_issuedBookActionPerformed
 
     /**
      * @param args the command line arguments
