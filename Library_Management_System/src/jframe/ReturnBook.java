@@ -51,6 +51,42 @@ public class ReturnBook extends javax.swing.JFrame {
         
     }
     
+    // To fetch the issue book details from the databse and display to book details panel
+    public boolean getIssueBookDetails(){
+        boolean success =false;
+        int bookId = Integer.parseInt(txt_bookId.getText());
+        int studentId = Integer.parseInt(txt_studentId.getText());
+        
+        try {
+            Connection con = DBConnection.getConnection();
+            String sql = "select * from issue_book_details where book_id = ? and student_id = ? and status = ? ";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, bookId);
+            pst.setInt(2, studentId);
+            pst.setString(3, "pending");
+            
+            ResultSet rs = pst.executeQuery();
+            
+            if(rs.next()){
+                success = true;
+                lbl_issueId.setText(rs.getString("id"));
+                lbl_bookName.setText(rs.getString("book_name"));
+                lbl_studentName.setText(rs.getString("student_name"));
+                lbl_issueDate.setText(rs.getString("issue_date"));
+                lbl_dueDate.setText(rs.getString("due_date"));
+                lbl_bookError.setText("");
+                
+            }else{
+                lbl_bookError.setText(" No Record Found ");
+                success = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return success;
+        
+    }
+    
     
 
 
@@ -71,7 +107,7 @@ public class ReturnBook extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        lbl_bookId = new javax.swing.JLabel();
+        lbl_issueId = new javax.swing.JLabel();
         lbl_bookName = new javax.swing.JLabel();
         lbl_studentName = new javax.swing.JLabel();
         lbl_bookError = new javax.swing.JLabel();
@@ -147,10 +183,10 @@ public class ReturnBook extends javax.swing.JFrame {
         jLabel17.setText("Issue Id :");
         jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 200, -1));
 
-        lbl_bookId.setBackground(new java.awt.Color(255, 255, 255));
-        lbl_bookId.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        lbl_bookId.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(lbl_bookId, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 220, 30));
+        lbl_issueId.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_issueId.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lbl_issueId.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel4.add(lbl_issueId, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 220, 30));
 
         lbl_bookName.setBackground(new java.awt.Color(255, 255, 255));
         lbl_bookName.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -406,12 +442,12 @@ public class ReturnBook extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lbl_bookError;
-    private javax.swing.JLabel lbl_bookId;
     private javax.swing.JLabel lbl_bookName;
     private javax.swing.JLabel lbl_dueDate;
     private javax.swing.JLabel lbl_issueDate;
     private javax.swing.JLabel lbl_issueDate1;
     private javax.swing.JLabel lbl_issueDate2;
+    private javax.swing.JLabel lbl_issueId;
     private javax.swing.JLabel lbl_studentName;
     private javax.swing.JPanel panal_main;
     private javax.swing.JTextField txt_bookId;
