@@ -94,6 +94,38 @@ public class ReturnBook extends javax.swing.JFrame {
         
     }
     
+    // Return the book
+    public boolean returnBook(){
+        boolean isReturned = false;
+        int bookId = Integer.parseInt(txt_bookId.getText());
+        int studentId = Integer.parseInt(txt_studentId.getText());
+        
+        try {
+            Connection con = DBConnection.getConnection();
+            String sql = "update issue_book_details set status = ? where student_id = ? and book_id = ? and status = ? ";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, "returned");
+            pst.setInt(2, studentId);
+            pst.setInt(3, bookId);
+            pst.setString(4, "pending");
+            
+            int rowCount = pst.executeUpdate();
+            
+            if(rowCount > 0 ){
+                isReturned = true;
+                
+            }else{
+                isReturned = false;
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isReturned;
+        
+    }
+    
     
 
 
@@ -208,7 +240,7 @@ public class ReturnBook extends javax.swing.JFrame {
         lbl_bookError.setBackground(new java.awt.Color(255, 255, 255));
         lbl_bookError.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_bookError.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(lbl_bookError, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 700, 340, 30));
+        jPanel4.add(lbl_bookError, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 700, 340, 30));
 
         jLabel21.setBackground(new java.awt.Color(255, 255, 255));
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
