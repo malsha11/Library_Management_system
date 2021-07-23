@@ -148,6 +148,38 @@ public class IssueBook extends javax.swing.JFrame {
         }
         
     }
+    
+    // checking whether book already allocated or not
+    
+    public boolean isAlreadyIssued(){
+         
+        boolean isAlreadyIssued = false;
+        int bookId = Integer.parseInt(txt_bookId.getText());
+        int studentId = Integer.parseInt(txt_studentId.getText());
+        
+        try {
+            Connection con = DBConnection.getConnection(); // connect to database
+            String sql = "select * from issue_book_details where book_id = ? and student_id = ? and status =? ";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, bookId);
+            pst.setInt(2, studentId);
+            pst.setString(3, "pending");
+            
+            int rowCount = pst.executeUpdate();
+            
+            if ( rowCount > 0 ){
+                isAlreadyIssued = true;
+            }else{
+                isAlreadyIssued = false;
+                
+            }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isAlreadyIssued;
+    }
 
 
     /**
@@ -517,6 +549,7 @@ public class IssueBook extends javax.swing.JFrame {
     private void btn_issuedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issuedBookActionPerformed
         if (issueBook() == true){
             JOptionPane.showMessageDialog(this, " Book Issued Successfully ");
+            updateBookCount(); // call the updateBookCount method
         }else{
             JOptionPane.showMessageDialog(this, " Can't Issued the book ");
         }
