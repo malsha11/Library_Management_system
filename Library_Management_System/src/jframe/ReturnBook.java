@@ -31,15 +31,15 @@ public class ReturnBook extends javax.swing.JFrame {
          
          try {
             Connection con = DBConnection.getConnection(); // connect to the databse
-            String sql = "update book_details set quentity = quentity -1  where book_id = ?";
+            String sql = "update book_details set quentity = quentity +1  where book_id = ?"; // update book quentity 0n 1
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, bookId);
             
             int rowCount = pst.executeUpdate();
             if ( rowCount > 0){
                 JOptionPane.showMessageDialog(this, " Book Count Updated ");
-                int initialCount = Integer.parseInt(lbl_issueDate.getText());
-                lbl_issueDate.setText(Integer.toString(initialCount -1 ));
+                
+              
                 
             }else {
                 JOptionPane.showMessageDialog(this, " Can't Update Book ");
@@ -418,7 +418,13 @@ public class ReturnBook extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_studentIdActionPerformed
 
     private void btn_issuedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issuedBookActionPerformed
-        
+        if(returnBook() == true){
+            JOptionPane.showMessageDialog(this, " Book Return Successfully ");
+            updateBookCount(); // call the updateBookCount method
+        }else{
+            JOptionPane.showMessageDialog(this, " Book Return Fail ");
+            
+        }
      
         
         
