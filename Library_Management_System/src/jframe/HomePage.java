@@ -290,6 +290,11 @@ public class HomePage extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_Books_26px.png"))); // NOI18N
         jLabel11.setText("  Issue Books");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
 
         jPanel9.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -536,17 +541,17 @@ public class HomePage extends javax.swing.JFrame {
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         jPanel8.setBackground(mouseEnterColor);
-        ManageStudents student = new ManageStudents();
+        ManageStudents student = new ManageStudents(); // Go to manage student page
         student.setVisible(true);
         dispose();        
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         jPanel3.setBackground(mouseEnterColor);
-        ManageBooks books = new ManageBooks();
+        ManageBooks books = new ManageBooks();  // Go to Mannage Books Page
         books.setVisible(true);
         dispose();
-        // Go to Mannage Books Page
+       
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
@@ -554,10 +559,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseExited
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-        ManageBooks books = new ManageBooks();
-        books.setVisible(true);
-        dispose();
-        // Go to Mannage Books Page
+       
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
@@ -565,14 +567,18 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseEntered
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        ManageStudents student = new ManageStudents();
-        student.setVisible(true);
-        dispose();
+       
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
         jPanel8.setBackground(mouseExitColor);
     }//GEN-LAST:event_jPanel8MouseExited
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        IssueBook book = new IssueBook(); // Go to the IssueBook Panel
+        book.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jLabel11MouseClicked
 
     /**
      * @param args the command line arguments

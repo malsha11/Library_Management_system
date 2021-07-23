@@ -522,7 +522,9 @@ public class IssueBook extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        // TODO add your handling code here:
+        HomePage home = new HomePage ();
+        home.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void txt_bookIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookIdFocusLost
@@ -547,20 +549,31 @@ public class IssueBook extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_studentIdActionPerformed
 
     private void btn_issuedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issuedBookActionPerformed
-        if (isAlreadyIssued() == false){
-            
-            if (issueBook() == true){
-                
-            JOptionPane.showMessageDialog(this, " Book Issued Successfully ");
-            updateBookCount(); // call the updateBookCount method
-            
-            }else{
-            JOptionPane.showMessageDialog(this, " Can't Issued the book ");
-        }
+        
+        if(lbl_quentity.getText().equals("0")){
+            JOptionPane.showMessageDialog(this, "Book is not Avalibale");
             
         }else{
-            JOptionPane.showMessageDialog(this, "This student Already has this book ");
+            if (isAlreadyIssued() == false){
+            
+                if (issueBook() == true){
+                
+                JOptionPane.showMessageDialog(this, " Book Issued Successfully ");
+                updateBookCount(); // call the updateBookCount method
+            
+                }else{
+                JOptionPane.showMessageDialog(this, " Can't Issued the book ");
+                }
+            
+            }else{
+                JOptionPane.showMessageDialog(this, "This student Already has this book ");
+            }
+        
+            
+            
         }
+        
+        
         
     }//GEN-LAST:event_btn_issuedBookActionPerformed
 
