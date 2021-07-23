@@ -242,6 +242,14 @@ public class HomePage extends javax.swing.JFrame {
         );
 
         jPanel8.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel8MouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel8MouseExited(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -250,6 +258,9 @@ public class HomePage extends javax.swing.JFrame {
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel9MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel9MouseEntered(evt);
             }
         });
 
@@ -524,7 +535,10 @@ public class HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        
+        jPanel8.setBackground(mouseEnterColor);
+        ManageStudents student = new ManageStudents();
+        student.setVisible(true);
+        dispose();        
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -545,6 +559,20 @@ public class HomePage extends javax.swing.JFrame {
         dispose();
         // Go to Mannage Books Page
     }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel9MouseEntered
+
+    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+        ManageStudents student = new ManageStudents();
+        student.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jPanel8MouseClicked
+
+    private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
+        jPanel8.setBackground(mouseExitColor);
+    }//GEN-LAST:event_jPanel8MouseExited
 
     /**
      * @param args the command line arguments
