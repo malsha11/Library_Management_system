@@ -52,8 +52,8 @@ public class ReturnBook extends javax.swing.JFrame {
     }
     
     // To fetch the issue book details from the databse and display to book details panel
-    public boolean getIssueBookDetails(){
-        boolean success =false;
+    public void getIssueBookDetails(){
+        
         int bookId = Integer.parseInt(txt_bookId.getText());
         int studentId = Integer.parseInt(txt_studentId.getText());
         
@@ -68,22 +68,29 @@ public class ReturnBook extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
-                success = true;
+                
                 lbl_issueId.setText(rs.getString("id"));
                 lbl_bookName.setText(rs.getString("book_name"));
                 lbl_studentName.setText(rs.getString("student_name"));
                 lbl_issueDate.setText(rs.getString("issue_date"));
                 lbl_dueDate.setText(rs.getString("due_date"));
+                
                 lbl_bookError.setText("");
                 
             }else{
                 lbl_bookError.setText(" No Record Found ");
-                success = false;
+                
+                lbl_issueId.setText("");
+                lbl_bookName.setText("");
+                lbl_studentName.setText("");
+                lbl_issueDate.setText("");
+                lbl_dueDate.setText("");
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return success;
+        
         
     }
     
@@ -201,7 +208,7 @@ public class ReturnBook extends javax.swing.JFrame {
         lbl_bookError.setBackground(new java.awt.Color(255, 255, 255));
         lbl_bookError.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_bookError.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(lbl_bookError, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 670, 340, -1));
+        jPanel4.add(lbl_bookError, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 700, 340, 30));
 
         jLabel21.setBackground(new java.awt.Color(255, 255, 255));
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -218,7 +225,10 @@ public class ReturnBook extends javax.swing.JFrame {
         lbl_issueDate2.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_issueDate2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel4.add(lbl_issueDate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 560, 220, 30));
-        jPanel4.add(lbl_dueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 630, 230, 30));
+
+        lbl_dueDate.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lbl_dueDate.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel4.add(lbl_dueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 630, 230, 30));
 
         jLabel22.setBackground(new java.awt.Color(255, 255, 255));
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -384,7 +394,7 @@ public class ReturnBook extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_issuedBookActionPerformed
 
     private void btn_issuedBook1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issuedBook1ActionPerformed
-        // TODO add your handling code here:
+        getIssueBookDetails(); // call the getIssueBookDetails method
     }//GEN-LAST:event_btn_issuedBook1ActionPerformed
 
     /**
