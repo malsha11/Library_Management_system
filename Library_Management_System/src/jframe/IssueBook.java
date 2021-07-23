@@ -32,7 +32,7 @@ public class IssueBook extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             
             while (rs.next()){
-                lbl_bookId.setText(rs.getString("book_id "));
+                lbl_bookId.setText(rs.getString("book_id"));
                 lbl_bookName.setText(rs.getString("book_name"));
                 lbl_author.setText(rs.getString("author"));
                 lbl_quentity.setText(rs.getString("quentity"));
@@ -43,6 +43,30 @@ public class IssueBook extends javax.swing.JFrame {
         }
         
     }
+    
+    // To fetch the student details from database and display it to student details panal
+    public void getStudentDetails(){
+        int studentId = Integer.parseInt(txt_studentId.getText());
+        
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement("select * from student_details where student_id = ? ");
+            pst.setInt(1, studentId);
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()){
+                lbl_studentId.setText(rs.getString("student_id"));
+                lbl_studentName.setText(rs.getString("name"));
+                lbl_course.setText(rs.getString("course"));
+                lbl_branch.setText(rs.getString("branch"));
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,7 +88,7 @@ public class IssueBook extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         lbl_studentId = new javax.swing.JLabel();
         lbl_studentName = new javax.swing.JLabel();
-        lbl_courseName = new javax.swing.JLabel();
+        lbl_course = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -161,10 +185,10 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_studentName.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(lbl_studentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 220, 30));
 
-        lbl_courseName.setBackground(new java.awt.Color(255, 255, 255));
-        lbl_courseName.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        lbl_courseName.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(lbl_courseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 220, 30));
+        lbl_course.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_course.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lbl_course.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(lbl_course, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 220, 30));
 
         panal_main.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 460, 800));
 
@@ -256,17 +280,17 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_bookId.setBackground(new java.awt.Color(255, 255, 255));
         lbl_bookId.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_bookId.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(lbl_bookId, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 220, 30));
+        jPanel4.add(lbl_bookId, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 220, 30));
 
         lbl_bookName.setBackground(new java.awt.Color(255, 255, 255));
         lbl_bookName.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_bookName.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(lbl_bookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 220, 30));
+        jPanel4.add(lbl_bookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 230, 30));
 
         lbl_author.setBackground(new java.awt.Color(255, 255, 255));
         lbl_author.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         lbl_author.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(lbl_author, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 220, 30));
+        jPanel4.add(lbl_author, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 220, 30));
 
         panal_main.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 800));
 
@@ -387,7 +411,12 @@ public class IssueBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void txt_bookIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookIdFocusLost
-        // TODO add your handling code here:
+        getBookDetails(); // call the get book details method
+        /*if (txt_bookId.getText().equals("")){
+            getBookDetails(); // call the get book details method
+            
+        }*/
+         
     }//GEN-LAST:event_txt_bookIdFocusLost
 
     private void txt_bookIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_bookIdActionPerformed
@@ -481,7 +510,7 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_bookId;
     private javax.swing.JLabel lbl_bookName;
     private javax.swing.JLabel lbl_branch;
-    private javax.swing.JLabel lbl_courseName;
+    private javax.swing.JLabel lbl_course;
     private javax.swing.JLabel lbl_quentity;
     private javax.swing.JLabel lbl_studentId;
     private javax.swing.JLabel lbl_studentName;
