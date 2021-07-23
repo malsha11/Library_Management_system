@@ -122,6 +122,32 @@ public class IssueBook extends javax.swing.JFrame {
         
        
     }
+    
+    // Updating book count
+    public void  updateBookCount(){
+         int bookId = Integer.parseInt(txt_bookId.getText());
+         
+         try {
+            Connection con = DBConnection.getConnection(); // connect to the databse
+            String sql = "update book_details set quentity = quentity -1  where book_id = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, bookId);
+            
+            int rowCount = pst.executeUpdate();
+            if ( rowCount > 0){
+                JOptionPane.showMessageDialog(this, " Book Count Updated ");
+                int initialCount = Integer.parseInt(lbl_quentity.getText());
+                lbl_quentity.setText(Integer.toString(initialCount -1 ));
+                
+            }else {
+                JOptionPane.showMessageDialog(this, " Can't Update Book ");
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
 
 
     /**
