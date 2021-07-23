@@ -5,6 +5,10 @@
  */
 package jframe;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author ACER
@@ -16,6 +20,28 @@ public class IssueBook extends javax.swing.JFrame {
      */
     public IssueBook() {
         initComponents();
+    }
+    // To fetch the book details from database and display it to book details panal
+    public void getBookDetails(){
+        int bookId = Integer.parseInt(txt_bookId.getText());
+        
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement("select * from book_details where book_id = ? ");
+            pst.setInt(1, bookId);
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()){
+                lbl_bookId.setText(rs.getString("book_id "));
+                lbl_bookName.setText(rs.getString("book_name"));
+                lbl_author.setText(rs.getString("author"));
+                lbl_quentity.setText(rs.getString("quentity"));
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
 
     /**
