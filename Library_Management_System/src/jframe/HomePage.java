@@ -302,6 +302,11 @@ public class HomePage extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_View_Details_26px.png"))); // NOI18N
         jLabel12.setText("  View Records");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -586,10 +591,17 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        ReturnBook book1 = new ReturnBook();
+        ReturnBook book1 = new ReturnBook(); // Go to Return Book page
         book1.setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        ViewAllRecord  allRecord = new ViewAllRecord(); // Go to ViewAllRecord page
+        allRecord.setVisible(true);
+        dispose();
+        
+    }//GEN-LAST:event_jLabel12MouseClicked
 
     /**
      * @param args the command line arguments

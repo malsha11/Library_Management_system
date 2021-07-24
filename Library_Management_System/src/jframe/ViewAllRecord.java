@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,83 +24,91 @@ public class ViewAllRecord extends javax.swing.JFrame {
      * Creates new form ViewAllRecord
      */
     DefaultTableModel model;
+
     public ViewAllRecord() {
         initComponents();
         setIssueBokDetailsToTable(); // call the method
     }
-    
+
     // To set the issue book  details in to the table 
-    public void setIssueBokDetailsToTable(){
-        try{
+    public void setIssueBokDetailsToTable() {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms","root",""); //DB connection
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms", "root", ""); //DB connection
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from issue_book_details"); // select all the data from issue_book__details table
-            
-            while (rs.next()){ // continue issue_book_details table addtions
+
+            while (rs.next()) { // continue issue_book_details table addtions
                 String id = rs.getString("id");
                 String bookName = rs.getString("book_name");
                 String studentName = rs.getString("student_name");
                 String issueDate = rs.getString("issue_date");
-                String dueDate =rs.getString("due_date");
-                String status =rs.getString("status");
-                
-                Object[] obj = {id,bookName,studentName,issueDate,dueDate,status};
+                String dueDate = rs.getString("due_date");
+                String status = rs.getString("status");
+
+                Object[] obj = {id, bookName, studentName, issueDate, dueDate, status};
                 model = (DefaultTableModel) tbl_issueBookDetails.getModel();
-                
+
                 model.addRow(obj);
-                
+
             }
-            
-        }catch (Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace(); // catch the setIssueBookDetailsToTable method
-            
+
         }
-        
+
     }
-    
+
     // Clear table method
-    
-    public void clearTable(){
-        DefaultTableModel model = (DefaultTableModel)tbl_issueBookDetails.getModel();
+    public void clearTable() {
+        DefaultTableModel model = (DefaultTableModel) tbl_issueBookDetails.getModel();
         model.setRowCount(0);
     }
-    
+
     // To fetch the record using date field
-    public void search(){
+    public void search() {
         Date ufromDate = date_fromDate.getDatoFecha();//util package date (ufromDate mean util from Date)
         Date uToDate = date_toDate.getDatoFecha();//util package date (uToDate mean util To Date)
-        
+
         Long l1 = ufromDate.getTime(); // get date  as a Long
         Long l2 = uToDate.getTime(); // get date as a Long
-        
+
         // converting util package date o SQL pakage date ( If we did't do this we can't access SQl date)
         java.sql.Date fromDate = new java.sql.Date(l1);
         java.sql.Date toDate = new java.sql.Date(l2);
-        
+
         try {
             Connection con = DBConnection.getConnection(); // DB connection
             String sql = "select * from issue_book_details where issue_date BETWEEN ? and ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setDate(1, fromDate);
             pst.setDate(2, toDate);
-            
+
             ResultSet rs = pst.executeQuery();
-            
-            while(rs.next()){ // continue search
-                String id = rs.getString("id");
-                String bookName = rs.getString("book_name");
-                String studentName = rs.getString("student_name");
-                String issueDate = rs.getString("issue_date");
-                String dueDate =rs.getString("due_date");
-                String status =rs.getString("status");
-                
-                Object[] obj = {id,bookName,studentName,issueDate,dueDate,status};
-                model = (DefaultTableModel) tbl_issueBookDetails.getModel();
-                
-                model.addRow(obj);
-                
+
+            if (rs.next() == false) { // That means not found record
+                JOptionPane.showMessageDialog(this, " No Record Found ");
+
+            } else {
+
+                while (rs.next()) {
+                    String id = rs.getString("id");
+                    String bookName = rs.getString("book_name");
+                    String studentName = rs.getString("student_name");
+                    String issueDate = rs.getString("issue_date");
+                    String dueDate = rs.getString("due_date");
+                    String status = rs.getString("status");
+
+                    Object[] obj = {id, bookName, studentName, issueDate, dueDate, status};
+                    model = (DefaultTableModel) tbl_issueBookDetails.getModel();
+
+                    model.addRow(obj);
+
+                }
+
             }
+
         } catch (Exception e) {
             e.printStackTrace();// catch the search method
         }
@@ -122,6 +131,8 @@ public class ViewAllRecord extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         date_toDate = new rojeru_san.componentes.RSDateChooser();
         jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         panal_table = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_issueBookDetails = new javax.swing.JTable();
@@ -189,6 +200,42 @@ public class ViewAllRecord extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 160, 180, 50));
 
+        jPanel2.setBackground(new java.awt.Color(204, 82, 77));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Back");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 60));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 240));
 
         panal_table.setBackground(new java.awt.Color(255, 255, 255));
@@ -226,15 +273,24 @@ public class ViewAllRecord extends javax.swing.JFrame {
 
     private void tbl_issueBookDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_issueBookDetailsMouseClicked
 
-    
 
     }//GEN-LAST:event_tbl_issueBookDetailsMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         clearTable(); //  call the clearTable method (first clear the table details then call the search method)
         search(); // call the search method
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        HomePage home = new HomePage(); //go to home page
+        home.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+       
+    }//GEN-LAST:event_jPanel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -275,10 +331,12 @@ public class ViewAllRecord extends javax.swing.JFrame {
     private rojeru_san.componentes.RSDateChooser date_fromDate;
     private rojeru_san.componentes.RSDateChooser date_toDate;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panal_table;
