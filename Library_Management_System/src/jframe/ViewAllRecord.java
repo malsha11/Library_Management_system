@@ -7,8 +7,10 @@ package jframe;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -62,6 +64,46 @@ public class ViewAllRecord extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)tbl_issueBookDetails.getModel();
         model.setRowCount(0);
     }
+    
+    // To fetch the record using date field
+    public void search(){
+        Date ufromDate = date_fromDate.getDatoFecha();//util package date (ufromDate mean util from Date)
+        Date uToDate = date_toDate.getDatoFecha();//util package date (uToDate mean util To Date)
+        
+        Long l1 = ufromDate.getTime(); // get date  as a Long
+        Long l2 = uToDate.getTime(); // get date as a Long
+        
+        // converting util package date o SQL pakage date ( If we did't do this we can't access SQl date)
+        java.sql.Date fromDate = new java.sql.Date(l1);
+        java.sql.Date toDate = new java.sql.Date(l2);
+        
+        try {
+            Connection con = DBConnection.getConnection(); // DB connection
+            String sql = "select * from issue_book_details where issue_date BETWEEN ? and ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setDate(1, fromDate);
+            pst.setDate(2, toDate);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()){ // continue search
+                String id = rs.getString("id");
+                String bookName = rs.getString("book_name");
+                String studentName = rs.getString("student_name");
+                String issueDate = rs.getString("issue_date");
+                String dueDate =rs.getString("due_date");
+                String status =rs.getString("status");
+                
+                Object[] obj = {id,bookName,studentName,issueDate,dueDate,status};
+                model = (DefaultTableModel) tbl_issueBookDetails.getModel();
+                
+                model.addRow(obj);
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();// catch the search method
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,7 +136,7 @@ public class ViewAllRecord extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/adicons8_Book_26px.png"))); // NOI18N
         jLabel12.setText(" View All Record ");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 290, 50));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 290, 50));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setMaximumSize(new java.awt.Dimension(5, 5));
@@ -111,7 +153,7 @@ public class ViewAllRecord extends javax.swing.JFrame {
             .addGap(0, 5, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 470, -1));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 470, -1));
 
         date_fromDate.setBackground(new java.awt.Color(153, 22, 116));
         date_fromDate.setForeground(new java.awt.Color(153, 22, 116));
@@ -129,17 +171,22 @@ public class ViewAllRecord extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Due Date");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 170, 110, 40));
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 110, 40));
 
         date_toDate.setBackground(new java.awt.Color(153, 22, 116));
         date_toDate.setForeground(new java.awt.Color(153, 22, 116));
         date_toDate.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         date_toDate.setPlaceholder("Select Due Date");
-        jPanel1.add(date_toDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 170, 280, -1));
+        jPanel1.add(date_toDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 160, 280, -1));
 
-        jButton1.setBackground(new java.awt.Color(204, 0, 102));
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton1.setText("SEARCH");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 160, 180, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 240));
@@ -182,6 +229,12 @@ public class ViewAllRecord extends javax.swing.JFrame {
     
 
     }//GEN-LAST:event_tbl_issueBookDetailsMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        clearTable(); //  call the clearTable method (first clear the table details then call the search method)
+        search(); // call the search method
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
