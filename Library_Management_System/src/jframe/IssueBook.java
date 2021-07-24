@@ -41,7 +41,7 @@ public class IssueBook extends javax.swing.JFrame {
                 lbl_quentity.setText(rs.getString("quentity"));
                 
             }else{
-                lbl_bookError.setText("Inviled BookId ");// if admin input invalid book id this messege will be show
+                lbl_bookError.setText("Inviled BookId");// if admin input invalid book id this messege will be show
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -311,7 +311,7 @@ public class IssueBook extends javax.swing.JFrame {
         lbl_studentError.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(lbl_studentError, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 660, 270, -1));
 
-        panal_main.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 460, 800));
+        panal_main.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 460, 800));
 
         jPanel4.setBackground(new java.awt.Color(153, 22, 116));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -496,6 +496,11 @@ public class IssueBook extends javax.swing.JFrame {
         btn_issuedBook.setBackground(new java.awt.Color(153, 22, 116));
         btn_issuedBook.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btn_issuedBook.setText("Issue Book");
+        btn_issuedBook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_issuedBookMouseClicked(evt);
+            }
+        });
         btn_issuedBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_issuedBookActionPerformed(evt);
@@ -548,33 +553,16 @@ public class IssueBook extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_studentIdActionPerformed
 
+    private void btn_issuedBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_issuedBookMouseClicked
+       
+    }//GEN-LAST:event_btn_issuedBookMouseClicked
+
     private void btn_issuedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issuedBookActionPerformed
-        
-        if(lbl_quentity.getText().equals("0")){
-            JOptionPane.showMessageDialog(this, "Book is not Avalibale");
-            
+        if(issueBook() == true ){
+            JOptionPane.showMessageDialog(this, "Book Issue Successfully");
         }else{
-            if (isAlreadyIssued() == false){
-            
-                if (issueBook() == true){
-                
-                JOptionPane.showMessageDialog(this, " Book Issued Successfully ");
-                updateBookCount(); // call the updateBookCount method
-            
-                }else{
-                JOptionPane.showMessageDialog(this, " Can't Issued the book ");
-                }
-            
-            }else{
-                JOptionPane.showMessageDialog(this, "This student Already has this book ");
-            }
-        
-            
-            
+            JOptionPane.showMessageDialog(this, " Can't issue the book ");
         }
-        
-        
-        
     }//GEN-LAST:event_btn_issuedBookActionPerformed
 
     /**

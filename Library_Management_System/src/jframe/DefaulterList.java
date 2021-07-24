@@ -38,7 +38,7 @@ public class DefaulterList extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms", "root", ""); //DB connection
-            PreparedStatement pst = con.prepareStatement("select * from issue_book_details where due_date < ? and status =? ");
+            PreparedStatement pst = con.prepareStatement("select * from issue_book_details where due_date < ? and status =? "); // To check who did not hand over the books before due date
             pst.setDate(1, todayDate);
             pst.setString(2, "pending");
             

@@ -5,7 +5,13 @@
  */
 package jframe;
 
-import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+
+
 
 /**
  *
@@ -16,11 +22,68 @@ public class HomePage extends javax.swing.JFrame {
     /**
      * Creates new form HomePage
      */
-    Color mouseEnterColor = new Color (0,0,0);
-    Color mouseExitColor = new Color (51 ,51 ,51 );
     
+    DefaultTableModel model;
     public HomePage() {
         initComponents();
+        setStudentDetailsToTable(); // call the method
+        setBookDetailsToTable(); // callthe method
+    }
+    
+    // To set the Students details in to the table 
+    public void setStudentDetailsToTable(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms","root",""); //DB connection
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(" select * from student_details"); // select all the data from students_details table
+            
+            while (rs.next()){ // continue studentDetails table addtions
+                String studentId = rs.getString("student_id");
+                String studentName = rs.getString("name");
+                String course = rs.getString("course");
+                String branch =rs.getString("branch");
+                
+                Object[] obj = {studentId,studentName,course,branch};
+                model = (DefaultTableModel) tbl_studentDetails.getModel();
+                
+                model.addRow(obj);
+                
+            }
+            
+        }catch (Exception e) {
+            e.printStackTrace(); // catch the setstudentDetailsToTable method
+            
+        }
+        
+    }
+    
+     // To set the book details in to the table 
+    public void setBookDetailsToTable(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms","root",""); //DB connection
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(" select * from book_details"); // select all the data from book_details table
+            
+            while (rs.next()){ // continue bookDetails table addtions
+                String bookId = rs.getString("book_id");
+                String bookName = rs.getString("book_name");
+                String author = rs.getString("author");
+                int quentity =rs.getInt("quentity");
+                
+                Object[] obj = {bookId,bookName,author,quentity};
+                model = (DefaultTableModel) tbl_bookDetails.getModel();
+                
+                model.addRow(obj);
+                
+            }
+            
+        }catch (Exception e) {
+            e.printStackTrace(); // catch the setBookDetailsToTable method
+            
+        }
+        
     }
 
     /**
@@ -71,11 +134,11 @@ public class HomePage extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_studentDetails = new javax.swing.JTable();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbl_bookDetails = new javax.swing.JTable();
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setMaximumSize(new java.awt.Dimension(30000, 30000));
@@ -313,16 +376,16 @@ public class HomePage extends javax.swing.JFrame {
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
-                .addComponent(jLabel12)
-                .addGap(22, 22, 22))
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
@@ -339,6 +402,11 @@ public class HomePage extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_View_Details_26px.png"))); // NOI18N
         jLabel15.setText(" Defaulter List");
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -366,19 +434,20 @@ public class HomePage extends javax.swing.JFrame {
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addContainerGap()
@@ -405,13 +474,13 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addGap(26, 26, 26)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addComponent(jLabel15)
-                .addGap(60, 60, 60)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel10)
-                .addGap(61, 61, 61))
+                .addGap(60, 60, 60))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(111, 111, 111)
@@ -495,25 +564,22 @@ public class HomePage extends javax.swing.JFrame {
 
         getContentPane().add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 110, 260, 140));
 
-        jTable1.setBackground(new java.awt.Color(204, 204, 204));
-        jTable1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13), new java.awt.Color(0, 102, 153))); // NOI18N
-        jTable1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_studentDetails.setBackground(new java.awt.Color(204, 204, 204));
+        tbl_studentDetails.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13), new java.awt.Color(0, 102, 153))); // NOI18N
+        tbl_studentDetails.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        tbl_studentDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Surangi", "Python", "Morawaka"},
-                {"", "", "", null},
-                {null, "", null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Student Id", "Name", "Course", "Branch"
             }
         ));
-        jTable1.setAlignmentX(5.0F);
-        jTable1.setAlignmentY(5.0F);
-        jTable1.setRowHeight(40);
-        jTable1.setRowMargin(10);
-        jScrollPane1.setViewportView(jTable1);
+        tbl_studentDetails.setAlignmentX(5.0F);
+        tbl_studentDetails.setAlignmentY(5.0F);
+        tbl_studentDetails.setRowHeight(40);
+        tbl_studentDetails.setRowMargin(10);
+        jScrollPane1.setViewportView(tbl_studentDetails);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 1090, 280));
 
@@ -527,25 +593,22 @@ public class HomePage extends javax.swing.JFrame {
         jLabel27.setText("Book Details");
         getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 680, 240, -1));
 
-        jTable2.setBackground(new java.awt.Color(204, 204, 204));
-        jTable2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13), new java.awt.Color(0, 102, 153))); // NOI18N
-        jTable2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_bookDetails.setBackground(new java.awt.Color(204, 204, 204));
+        tbl_bookDetails.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13), new java.awt.Color(0, 102, 153))); // NOI18N
+        tbl_bookDetails.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        tbl_bookDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Surangi", "Python", "Morawaka"},
-                {"", "", "", null},
-                {null, "", null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Book id", "Name", "Author", "Quentity"
             }
         ));
-        jTable2.setAlignmentX(5.0F);
-        jTable2.setAlignmentY(5.0F);
-        jTable2.setRowHeight(40);
-        jTable2.setRowMargin(10);
-        jScrollPane2.setViewportView(jTable2);
+        tbl_bookDetails.setAlignmentX(5.0F);
+        tbl_bookDetails.setAlignmentY(5.0F);
+        tbl_bookDetails.setRowHeight(40);
+        tbl_bookDetails.setRowMargin(10);
+        jScrollPane2.setViewportView(tbl_bookDetails);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 720, 1080, 270));
 
@@ -554,22 +617,22 @@ public class HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        jPanel8.setBackground(mouseEnterColor);
-        ManageStudents student = new ManageStudents(); // Go to manage student page
+        
+        ManageStudents student = new ManageStudents(); // Go to ManageStudent page
         student.setVisible(true);
         dispose();        
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        jPanel3.setBackground(mouseEnterColor);
-        ManageBooks books = new ManageBooks();  // Go to Mannage Books Page
+        
+        ManageBooks books = new ManageBooks();  // Go to MannageBooks Page
         books.setVisible(true);
         dispose();
        
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
-        jPanel3.setBackground(mouseExitColor);
+       
     }//GEN-LAST:event_jLabel5MouseExited
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
@@ -585,7 +648,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
-        jPanel8.setBackground(mouseExitColor);
+        
     }//GEN-LAST:event_jPanel8MouseExited
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
@@ -608,10 +671,16 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
-        IssueBookDetails  issueBook = new IssueBookDetails(); // Go to ViewAllRecord page
+        IssueBookDetails  issueBook = new IssueBookDetails(); // Go to IssueBookDetails page
         issueBook.setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        DefaulterList  list = new DefaulterList(); // Go to DefaulterList page
+        list.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jLabel15MouseClicked
 
     /**
      * @param args the command line arguments
@@ -691,7 +760,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tbl_bookDetails;
+    private javax.swing.JTable tbl_studentDetails;
     // End of variables declaration//GEN-END:variables
 }

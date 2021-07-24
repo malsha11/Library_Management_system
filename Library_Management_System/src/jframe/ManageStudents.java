@@ -66,7 +66,7 @@ public class ManageStudents extends javax.swing.JFrame {
         studentId = Integer.parseInt(txt_studentId.getText());
         studentName = txt_studentName.getText();
         course = combo_CourseName.getSelectedItem().toString();
-        branch = combo_branch.getSelectedItem().toString();
+        branch = jComboBox1.getSelectedItem().toString();
         // Insert data into student_details table 
         
         try {
@@ -102,7 +102,7 @@ public class ManageStudents extends javax.swing.JFrame {
         studentId = Integer.parseInt(txt_studentId.getText());
         studentName = txt_studentName.getText();
         course = combo_CourseName.getSelectedItem().toString();
-        branch = combo_branch.getSelectedItem().toString();
+        branch = jComboBox1.getSelectedItem().toString();
         
         try {
             Connection con = DBConnection.getConnection();
@@ -183,7 +183,7 @@ public class ManageStudents extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        combo_branch = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         combo_CourseName = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -312,9 +312,9 @@ public class ManageStudents extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 710, 110, 60));
 
-        combo_branch.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
-        combo_branch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IT", "CS", "PLAIN", "ELECTRONICS" }));
-        jPanel1.add(combo_branch, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 600, 330, -1));
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IT", "CS", "PLAIN", "ELECTRONICS" }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 600, 330, -1));
 
         combo_CourseName.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         combo_CourseName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BSC", "MSC", "PHD" }));
@@ -457,7 +457,7 @@ public class ManageStudents extends javax.swing.JFrame {
         txt_studentName.setText(model.getValueAt(rowNo, 1).toString());
         
         combo_CourseName.setSelectedItem(model.getValueAt(rowNo, 2).toString()); // to select data in combo_CourseName
-        combo_branch.setSelectedItem(model.getValueAt(rowNo, 3));// to select data in combo_branch
+        jComboBox1.setSelectedItem(model.getValueAt(rowNo, 3));// to select data in combo_branch
        
         
     }//GEN-LAST:event_tbl_studentDetailsMouseClicked
@@ -560,10 +560,10 @@ public class ManageStudents extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> combo_CourseName;
-    private javax.swing.JComboBox<String> combo_branch;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

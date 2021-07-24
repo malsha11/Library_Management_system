@@ -50,7 +50,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="450" y="0" width="460" height="800"/>
+              <AbsoluteConstraints x="460" y="0" width="460" height="800"/>
             </Constraint>
           </Constraints>
 
@@ -734,6 +734,7 @@
             <Property name="text" type="java.lang.String" value="Issue Book"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_issuedBookMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_issuedBookActionPerformed"/>
           </Events>
           <Constraints>
