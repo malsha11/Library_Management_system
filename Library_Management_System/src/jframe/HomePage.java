@@ -6,7 +6,9 @@
 package jframe;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +29,8 @@ public class HomePage extends javax.swing.JFrame {
     public HomePage() {
         initComponents();
         setStudentDetailsToTable(); // call the method
-        setBookDetailsToTable(); // callthe method
+        setBookDetailsToTable(); // call the method
+        setDataToCards(); //call the method
     }
     
     // To set the Students details in to the table 
@@ -85,6 +88,46 @@ public class HomePage extends javax.swing.JFrame {
         }
         
     }
+    
+    public void setDataToCards(){
+        
+        Statement st = null;
+        ResultSet rs = null;
+        
+        long l = System.currentTimeMillis();
+        Date todayDate = new Date(l);
+        
+        try {
+            Connection con = DBConnection.getConnection();
+            
+            st = con.createStatement();
+            PreparedStatement pst = con.prepareStatement("select * from book_details", ResultSet.TYPE_SCROLL_SENSITIVE, 
+                    ResultSet.CONCUR_UPDATABLE);
+            rs= pst.executeQuery();
+            rs.last(); // go to last record and it will return the count of row
+            lbl_numberOfBooks.setText(Integer.toString(rs.getRow()));
+            
+            
+            PreparedStatement pst1 = con.prepareStatement("select * from student_details", ResultSet.TYPE_SCROLL_SENSITIVE, 
+                    ResultSet.CONCUR_UPDATABLE);
+            rs= pst1.executeQuery();
+            rs.last(); // go to last record and it will return the count of row
+            lbl_numberOfStudents.setText(Integer.toString(rs.getRow()));
+            
+            
+            PreparedStatement pst2 = con.prepareStatement("select * from issue_book_details where status = '"+"pending"+"'", ResultSet.TYPE_SCROLL_SENSITIVE, 
+                    ResultSet.CONCUR_UPDATABLE);
+            rs= pst2.executeQuery();
+            rs.last(); // go to last record and it will return the count of row
+            lbl_issuedBooks.setText(Integer.toString(rs.getRow()));
+                    
+                    
+            
+        } catch (Exception e) {
+            e.printStackTrace(); //catch the setDataCard method
+        }
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,17 +164,17 @@ public class HomePage extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
+        lbl_numberOfStudents = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
+        lbl_numberOfBooks = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
+        lbl_defaulterList = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
+        lbl_issuedBooks = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_studentDetails = new javax.swing.JTable();
@@ -499,10 +542,10 @@ public class HomePage extends javax.swing.JFrame {
         jPanel11.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(0, 102, 102)));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_People_50px.png"))); // NOI18N
-        jLabel17.setText("10");
-        jPanel11.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 130, -1));
+        lbl_numberOfStudents.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        lbl_numberOfStudents.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_People_50px.png"))); // NOI18N
+        lbl_numberOfStudents.setText("10");
+        jPanel11.add(lbl_numberOfStudents, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 130, -1));
 
         getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, 260, 140));
 
@@ -515,10 +558,10 @@ public class HomePage extends javax.swing.JFrame {
         jPanel12.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(0, 102, 102)));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/issue.png"))); // NOI18N
-        jLabel18.setText("10");
-        jPanel12.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 130, -1));
+        lbl_numberOfBooks.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        lbl_numberOfBooks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/issue.png"))); // NOI18N
+        lbl_numberOfBooks.setText("10");
+        jPanel12.add(lbl_numberOfBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 130, -1));
 
         getContentPane().add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 260, 140));
 
@@ -531,10 +574,10 @@ public class HomePage extends javax.swing.JFrame {
         jPanel13.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(0, 102, 102)));
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Statics.png"))); // NOI18N
-        jLabel20.setText("10");
-        jPanel13.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 120, -1));
+        lbl_defaulterList.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        lbl_defaulterList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Statics.png"))); // NOI18N
+        lbl_defaulterList.setText("10");
+        jPanel13.add(lbl_defaulterList, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 120, -1));
 
         getContentPane().add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 110, 260, 140));
 
@@ -545,17 +588,17 @@ public class HomePage extends javax.swing.JFrame {
 
         jLabel22.setFont(new java.awt.Font("Segoe UI Symbol", 1, 20)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel22.setText("Issued books");
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 80, 240, -1));
+        jLabel22.setText("Issued books (Pending Books)");
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 80, 290, -1));
 
         jPanel14.setBackground(new java.awt.Color(199, 241, 241));
         jPanel14.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(204, 0, 51)));
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_Sell_50px.png"))); // NOI18N
-        jLabel23.setText("10");
-        jPanel14.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 130, -1));
+        lbl_issuedBooks.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        lbl_issuedBooks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_Sell_50px.png"))); // NOI18N
+        lbl_issuedBooks.setText("10");
+        jPanel14.add(lbl_issuedBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 130, -1));
 
         jLabel24.setFont(new java.awt.Font("Segoe UI Symbol", 1, 20)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(102, 102, 102));
@@ -726,14 +769,10 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -760,6 +799,10 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl_defaulterList;
+    private javax.swing.JLabel lbl_issuedBooks;
+    private javax.swing.JLabel lbl_numberOfBooks;
+    private javax.swing.JLabel lbl_numberOfStudents;
     private javax.swing.JTable tbl_bookDetails;
     private javax.swing.JTable tbl_studentDetails;
     // End of variables declaration//GEN-END:variables
