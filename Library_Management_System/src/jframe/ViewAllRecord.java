@@ -133,6 +133,7 @@ public class ViewAllRecord extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         panal_table = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_issueBookDetails = new javax.swing.JTable();
@@ -182,23 +183,28 @@ public class ViewAllRecord extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Due Date");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 110, 40));
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 110, 40));
 
         date_toDate.setBackground(new java.awt.Color(153, 22, 116));
         date_toDate.setForeground(new java.awt.Color(153, 22, 116));
         date_toDate.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         date_toDate.setPlaceholder("Select Due Date");
-        jPanel1.add(date_toDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 160, 280, -1));
+        jPanel1.add(date_toDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 160, 280, -1));
 
         jButton1.setBackground(new java.awt.Color(255, 51, 51));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton1.setText("SEARCH");
+        jButton1.setText("ALL");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 160, 180, 50));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 150, 180, 50));
 
         jPanel2.setBackground(new java.awt.Color(204, 82, 77));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -235,6 +241,21 @@ public class ViewAllRecord extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 60));
+
+        jButton2.setBackground(new java.awt.Color(255, 51, 51));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jButton2.setText("SEARCH");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 150, 180, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 240));
 
@@ -277,8 +298,7 @@ public class ViewAllRecord extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_issueBookDetailsMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        clearTable(); //  call the clearTable method (first clear the table details then call the search method)
-        search(); // call the search method
+       
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -291,6 +311,20 @@ public class ViewAllRecord extends javax.swing.JFrame {
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
        
     }//GEN-LAST:event_jPanel2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        clearTable();
+        setIssueBokDetailsToTable();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        clearTable(); //  call the clearTable method (first clear the table details then call the search method)
+        search(); // call the search method
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -331,6 +365,7 @@ public class ViewAllRecord extends javax.swing.JFrame {
     private rojeru_san.componentes.RSDateChooser date_fromDate;
     private rojeru_san.componentes.RSDateChooser date_toDate;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel18;
