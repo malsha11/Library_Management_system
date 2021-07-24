@@ -120,6 +120,13 @@ public class HomePage extends javax.swing.JFrame {
             rs= pst2.executeQuery();
             rs.last(); // go to last record and it will return the count of row
             lbl_issuedBooks.setText(Integer.toString(rs.getRow()));
+            
+            
+             PreparedStatement pst3 = con.prepareStatement("select * from issue_book_details where due_date < '"+todayDate+"' and status = '"+"pending"+"'", ResultSet.TYPE_SCROLL_SENSITIVE, 
+                    ResultSet.CONCUR_UPDATABLE);
+            rs= pst3.executeQuery();
+            rs.last(); // go to last record and it will return the count of row
+            lbl_defaulterList.setText(Integer.toString(rs.getRow()));
                     
                     
             
