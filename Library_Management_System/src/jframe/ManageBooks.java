@@ -467,7 +467,7 @@ public class ManageBooks extends javax.swing.JFrame {
                 .addContainerGap(311, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 1140, 820));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 1140, 820));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
