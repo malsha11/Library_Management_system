@@ -184,6 +184,11 @@ public class LoginPage extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(207, 207, 207));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setText("SIGNUP");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -221,6 +226,12 @@ public class LoginPage extends javax.swing.JFrame {
             login();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        SignUpPage signUp= new SignUpPage();  // Go to SignUpPage Page
+        signUp.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments

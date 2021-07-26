@@ -660,7 +660,7 @@ public class HomePage extends javax.swing.JFrame {
         tbl_bookDetails.setRowMargin(10);
         jScrollPane2.setViewportView(tbl_bookDetails);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 720, 1080, 270));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 720, 1080, 270));
 
         setSize(new java.awt.Dimension(1532, 1086));
         setLocationRelativeTo(null);
