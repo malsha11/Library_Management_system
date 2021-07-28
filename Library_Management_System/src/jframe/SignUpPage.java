@@ -178,7 +178,7 @@ public class SignUpPage extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/library-3.png.png"))); // NOI18N
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(-10, 0, 1000, 830);
+        jLabel3.setBounds(-10, 0, 990, 830);
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 990, 830));
 
