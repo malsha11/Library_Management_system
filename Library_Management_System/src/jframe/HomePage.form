@@ -193,7 +193,7 @@
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="jLabel15" min="-2" pref="211" max="-2" attributes="0"/>
                                       <Component id="jLabel14" min="-2" pref="211" max="-2" attributes="0"/>
-                                      <Component id="jLabel10" alignment="1" min="-2" pref="211" max="-2" attributes="0"/>
+                                      <Component id="lbl_logout" alignment="1" min="-2" pref="211" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -237,9 +237,9 @@
                   <Component id="jLabel14" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace pref="46" max="32767" attributes="0"/>
                   <Component id="jLabel15" min="-2" pref="46" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="lbl_logout" min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -494,7 +494,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabel10">
+        <Component class="javax.swing.JLabel" name="lbl_logout">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Yu Gothic UI Semibold" size="18" style="1"/>
@@ -507,6 +507,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="  Logout"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbl_logoutMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
