@@ -9,6 +9,7 @@ import static java.lang.Class.forName;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -43,6 +44,10 @@ public class SignUpPage extends javax.swing.JFrame {
             int updatedRowCount = pst.executeUpdate();
             if(updatedRowCount >0 ){
                 JOptionPane.showMessageDialog(this, "SignUp Successfully");
+                LoginPage page = new LoginPage ();
+                page.setVisible(true);
+                dispose();
+                
             }else{
                 JOptionPane.showMessageDialog(this, "Record inserted Failure, SignUp Fail");
                 
@@ -55,7 +60,73 @@ public class SignUpPage extends javax.swing.JFrame {
         
         }
     }
-
+    // Check signUp page Validation
+    public boolean validateSignup(){
+        String name = txt_username.getText();
+        String pwd = txt_password.getText();
+        String email = txt_email.getText();
+        String contact = txt_contact.getText();
+        
+        if(name.equals(""))  {
+            JOptionPane.showMessageDialog(this,"Please Enter User Name");
+            return false;
+            
+        }
+          
+        if(pwd.equals(""))  {
+            JOptionPane.showMessageDialog(this,"Please Enter Password");
+            return false;
+            
+        }
+          
+        if(email.equals(""))  {
+            JOptionPane.showMessageDialog(this,"Please Enter email");
+            return false;
+            
+        }
+          
+        if(contact.equals(""))  {
+            JOptionPane.showMessageDialog(this,"Please Enter contact Number");
+            return false;
+            
+        }
+        return true;
+        
+        
+    
+        
+        
+    }
+    // To check Duplicate usres
+    public boolean checkedDuplicateUsers(){
+        String name = txt_username.getText();
+        boolean isExits = false;
+        
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms","root","");
+            PreparedStatement pst = con.prepareStatement("select * from users where name = ? ");
+            pst.setString(1, name);
+            ResultSet rs = pst.executeQuery();
+            
+            if (rs.next()){
+                isExits = true;
+                
+            }else{
+                isExits = false;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+          
+        }
+        return isExits;
+    }
+            
+                
+            
+          
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,19 +168,19 @@ public class SignUpPage extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 30)); // NOI18N
         jLabel1.setText("LIBRARY   MANAGEMENT   SYSTEM");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(130, 40, 760, 110);
+        jLabel1.setBounds(180, 40, 760, 110);
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 102, 102));
         jLabel2.setText("Welcome  To");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(310, -10, 350, 110);
+        jLabel2.setBounds(360, -10, 350, 110);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/library-3.png.png"))); // NOI18N
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(-20, 0, 980, 830);
+        jLabel3.setBounds(-10, 0, 990, 830);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 830));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 990, 830));
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 30)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 102, 102));
@@ -173,6 +244,11 @@ public class SignUpPage extends javax.swing.JFrame {
         txt_username.setBackground(new java.awt.Color(255, 204, 204));
         txt_username.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
         txt_username.setOpaque(false);
+        txt_username.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_usernameFocusLost(evt);
+            }
+        });
         txt_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_usernameActionPerformed(evt);
@@ -209,8 +285,16 @@ public class SignUpPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_usernameActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        insertSignupDetails();
+        if (validateSignup() == true){
+              insertSignupDetails();
+            
+        }
+      
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txt_usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_usernameFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_usernameFocusLost
 
     /**
      * @param args the command line arguments
